@@ -4,7 +4,7 @@ Start with D Dorian, or choose Shur to explore the Persian scale on any tonic. O
 
 The public catalog contains app-facing model metadata, tuning intervals, references and geographic navigation. The research workbooks and notes are private.
 
-[Open the Atlas](https://persianmusicscales.github.io/international-music-scales-atlas/) · [Read the guide](https://persianmusicscales.github.io/international-music-scales-atlas/guide.html) · [Report a problem](https://github.com/PersianMusicScales/international-music-scales-atlas/issues)
+[Open the Atlas](https://worldmusicscalesatlas.github.io/) · [Read the guide](https://worldmusicscalesatlas.github.io/guide.html) · [Report a problem](https://github.com/worldmusicscalesatlas/worldmusicscalesatlas.github.io/issues)
 
 ## Run locally
 
@@ -12,4 +12,4 @@ Run `python3 -m http.server 8000` from the project directory and visit http://lo
 
 ## Credits and reuse
 
-Created by Dr. Pouya Hosseini. The [license](LICENSE) covers original project material. The basemap uses [Natural Earth](https://www.naturalearthdata.com/about/terms-of-use/) public-domain relief and country outlines. Citations accompany the research models. Seven named Western diatonic modes are available alongside the regional collection. See the [Copyright & Terms of Use](https://persianmusicscales.github.io/international-music-scales-atlas/about.html#terms) for the rights reservation covering original materials. Third-party references retain their respective rights.
+Created by Dr. Pouya Hosseini. The [license](LICENSE) covers original project material. The basemap uses [Natural Earth](https://www.naturalearthdata.com/about/terms-of-use/) public-domain relief and country outlines. Citations accompany the research models. Seven named Western diatonic modes are available alongside the regional collection. See the [Copyright & Terms of Use](https://worldmusicscalesatlas.github.io/about.html#terms) for the rights reservation covering original materials. Third-party references retain their respective rights.
