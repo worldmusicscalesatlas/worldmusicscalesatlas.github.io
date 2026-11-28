@@ -19,7 +19,7 @@ import {readFileSync} from 'node:fs'
 import {wheel,rotateModel,rotateTonic,notation} from './wheel.js'
 const catalog=JSON.parse(readFileSync(new URL('./catalog.json',import.meta.url)))
 test('Every geographic model is selectable and transposable through 24 ring positions',()=>{
- assert.equal(catalog.scales.length,296)
+ assert.equal(catalog.scales.length,305)
  for(const m of catalog.scales){
   assert.ok(catalog.regions.find(g=>g.id===m.geo_id).model_ids.includes(m.id))
   for(let t=0;t<12;t+=.5){
@@ -69,7 +69,7 @@ test('Batch 02 Javanese observations preserve the verified source values and dis
  const expected=[["EXP-IDN-ELLIS-1885-SLENDRO-MEAN",[228,256,244,232,240],true,5],["EXP-IDN-ELLIS-1885-SLENDRO-LOWER-GENDER",[191,251,249,261,220],false,6],["EXP-IDN-ELLIS-1885-SLENDRO-UPPER-GENDER",[219,256,261,223,288],false,6],["EXP-IDN-ELLIS-1885-SLENDRO-LAND-SARON",[270,200,266,239,243],false,6],["EXP-IDN-ELLIS-1885-PELOG-INVENTORY",[137,309,129,112,133,278,102],true,7],["EXP-IDN-ELLIS-1885-PELOG-DANGSOE",[137,550,133,278,102],true,5],["EXP-IDN-ELLIS-1885-PELOG-BEM-ELLIS",[137,438,112,411,102],true,5],["EXP-IDN-ELLIS-1885-PELOG-BEM-LAND",[147,416,96,429,112],true,5],["EXP-IDN-ELLIS-1885-PELOG-BARANG-ELLIS",[137,438,112,133,380],true,5],["EXP-IDN-ELLIS-1885-PELOG-BARANG-LAND",[151,426,111,179,333],true,5]]
  const region=catalog.regions.find(g=>g.id==='exp-idn')
  assert.ok(region);assert.deepEqual(region.country_iso3_for_navigation,['IDN'])
- assert.equal(catalog.regions.length,38);assert.equal(catalog.sources.length,63)
+ assert.equal(catalog.regions.length,42);assert.equal(catalog.sources.length,69)
  assert.deepEqual(region.model_ids,expected.map(row=>row[0]))
  for(const [id,steps,circular,n] of expected){
   const model=catalog.scales.find(m=>m.id===id)
@@ -157,14 +157,14 @@ test('Batches 11–14 preserve primary frequency observations',()=>{
  }
 })
 
-test('Public navigation contains only 38 playable geographic entries and linked references',()=>{
- assert.equal(catalog.scales.length,296);assert.equal(catalog.regions.length,38)
+test('Public navigation contains only 42 playable geographic entries and linked references',()=>{
+ assert.equal(catalog.scales.length,305);assert.equal(catalog.regions.length,42)
  assert.deepEqual(playableRegions(catalog.regions,catalog.scales),catalog.regions)
  const ids=new Set(catalog.scales.map(s=>s.id))
  for(const g of catalog.regions){assert.ok(g.model_ids.length);assert.ok(g.model_ids.every(id=>ids.has(id)&&catalog.scales.find(s=>s.id===id).geo_id===g.id));assert.equal(coverageLabel(g),g.model_ids.length+' models')}
- const assigned=catalog.regions.flatMap(g=>g.model_ids);assert.equal(assigned.length,296);assert.equal(new Set(assigned).size,296)
+ const assigned=catalog.regions.flatMap(g=>g.model_ids);assert.equal(assigned.length,305);assert.equal(new Set(assigned).size,305)
  for(const s of catalog.scales)assert.ok(assigned.includes(s.id))
- const referenced=new Set(catalog.scales.flatMap(m=>m.source_ids));assert.equal(referenced.size,63);assert.ok(catalog.sources.every(s=>referenced.has(s.id)))
+ const referenced=new Set(catalog.scales.flatMap(m=>m.source_ids));assert.equal(referenced.size,69);assert.ok(catalog.sources.every(s=>referenced.has(s.id)))
  const fake=[{id:'empty',model_ids:[]},{id:'missing',model_ids:['missing-id']},{id:'context',coverage_status:'context_only',model_ids:['example']},{id:'wrong',model_ids:['example']},{id:'ok',model_ids:['example']}]
  assert.deepEqual(playableRegions(fake,[{id:'example',geo_id:'ok'}]).map(g=>g.id),['ok'])
 })
@@ -180,4 +180,13 @@ test('Batches 19–22 preserve documented pitch descriptions and nominal ranges'
  for(const [id,geo,steps,circular,n] of expected){const m=catalog.scales.find(s=>s.id===id);assert.ok(m);assert.equal(m.geo_id,geo);assert.deepEqual(m.intervals_cents,steps);assert.equal(m.circle_ready,circular);assert.equal(m.notes_count,n);assert.equal(m.reference_pitch_only,true);assert.ok(m.cultural_reuse_status);assert.deepEqual(rotateModel(m,1).intervals_cents,steps);assert.match(wheel(m,0,'Sharps','Major'),/REFERENCE/);assert.doesNotMatch(wheel(m,2.5,'Sharps','Major',modes[0]),/undefined|NaN/);if(m.source_semitone_positions)assert.deepEqual(steps,m.source_semitone_positions.slice(1).map((v,i)=>100*(v-m.source_semitone_positions[i])))}
  const valiha=catalog.scales.find(m=>m.id==='B20-MG-VALIHA');const pitches=[...valiha.source_left_hand_midi,...valiha.source_right_hand_midi].sort((a,b)=>a-b);assert.equal(pitches.length,15);assert.deepEqual(valiha.intervals_cents,pitches.slice(1).map((v,i)=>100*(v-pitches[i])));assert.equal(pitches.at(-1)-pitches[0],24)
  const balo=catalog.scales.find(m=>m.id==='B20-GM-BALO');assert.equal(balo.category,'Theoretical tuning comparator');assert.ok(balo.intervals_cents.every(v=>v===1200/7));assert.equal(catalog.scales.filter(m=>/^B(19|20|21|22)-/.test(m.id)).length,7)
+})
+
+test('Batches 23–26 preserve measured fundamentals, statistical means and teaching pitch references',()=>{
+ const expected=[["B23-NI-MARIMBA","b23-nicaragua-marimba",[200,200,100,200,200,100,200,200,200,100,200,200,100,200,200,200,100,200,200,100,200],false,22],["B23-TT-SOPRANO-OUTER","b23-trinidad-steelpan",[92,110,104,101,102,93,109,75,113,83,129],false,12],["B25-NG-UBOAKA-EZE","b25-igbo-uboaka",[200,200,100,200,200,100,200],true,7],["B26-LT-CLUSTER-1","b26-lithuania-vocal",[193,146,186,202],false,5],["B26-LT-CLUSTER-2","b26-lithuania-vocal",[218,166,118,184],false,5],["B26-LT-CLUSTER-4","b26-lithuania-vocal",[197,202,120,189],false,5],["B26-LT-CLUSTER-5","b26-lithuania-vocal",[197,111,198,196],false,5],["B26-LT-CLUSTER-6","b26-lithuania-vocal",[203,119,197,160],false,5],["B26-LT-CLUSTER-7","b26-lithuania-vocal",[185,165,156,190],false,5]]
+ for(const [id,geo,steps,circular,n] of expected){const m=catalog.scales.find(s=>s.id===id);assert.ok(m);assert.equal(m.geo_id,geo);assert.deepEqual(m.intervals_cents,steps);assert.equal(m.circle_ready,circular);assert.equal(m.notes_count,n);assert.equal(m.reference_pitch_only,true);assert.ok(m.cultural_reuse_status);assert.deepEqual(rotateModel(m,1).intervals_cents,steps);assert.match(wheel(m,0,'Sharps','Major'),/REFERENCE/);assert.doesNotMatch(wheel(m,2.5,'Sharps','Major',modes[0]),/undefined|NaN/);if(m.source_reported_intervals_semitones)assert.deepEqual(steps,m.source_reported_intervals_semitones.map(x=>Math.round(x*100)))}
+ const sp=catalog.scales.find(m=>m.id==='B23-TT-SOPRANO-OUTER');const hz=sp.source_frequencies_hz;assert.equal(hz.length,12);const p=hz.map(v=>Math.round(1200*Math.log2(v/hz[0])));assert.deepEqual(sp.intervals_cents,p.slice(1).map((v,i)=>v-p[i]));assert.equal(sp.reported_span_cents,p.at(-1));assert.equal(sp.circle_ready,false)
+ const ni=catalog.scales.find(m=>m.id==='B23-NI-MARIMBA');assert.equal(ni.notes_count,ni.source_reported_key_count);assert.equal(ni.intervals_cents.reduce((a,b)=>a+b,0),3600)
+ const ig=catalog.scales.find(m=>m.id==='B25-NG-UBOAKA-EZE');assert.equal(ig.source_reported_tine_count,ig.notes_count+1);assert.deepEqual(ig.intervals_cents,ig.source_semitone_positions.slice(1).map((v,i)=>100*(v-ig.source_semitone_positions[i])))
+ const lt=catalog.scales.filter(m=>m.id.startsWith('B26-LT-CLUSTER-'));assert.deepEqual(lt.map(m=>m.source_cluster_number),[1,2,4,5,6,7]);assert.ok(lt.every(m=>!m.circle_ready&&m.notes_count===5));assert.equal(catalog.scales.filter(m=>/^B(23|24|25|26)-/.test(m.id)).length,9)
 })
