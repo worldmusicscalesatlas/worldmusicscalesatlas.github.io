@@ -4,13 +4,14 @@ import {esc} from './diagrams.js'
 import {nearestDegree} from './compare.js'
 import {positions,fmt,signed} from './theory.js'
 import {wheel,notation,rotateTonic,rotateModel,tonicName} from './wheel.js?v=batch02'
-import {mountGlobe} from './globe.js?v=batch11-14'
-import {coverageInfo} from './coverage.js?v=batch11-14'
+import {mountGlobe} from './globe.js?v=playable-only'
+import {playableRegions} from './coverage.js?v=playable-only'
 const by=id=>document.getElementById(id)
 const query=new URLSearchParams(location.search)
 const response=await fetch(new URL('./catalog.json',import.meta.url))
 if(!response.ok)throw Error('Could not load tuning catalog')
-const {scales,regions,sources}=await response.json()
+const {scales,regions:catalogRegions,sources}=await response.json()
+const regions=playableRegions(catalogRegions,scales)
 const all=[...scales,...modes]
 const lookup=id=>all.find(m=>m.id===id)
 const label=m=>[m.name,m.local_script,m.variant,m.tuning_model].filter(Boolean).join(' · ')
@@ -53,8 +54,6 @@ function chooseRegion(id,push=false,animate=true){
  const models=all.filter(m=>m.geo_id===id)
  select('model',[['','Choose a scale'],...models.map(m=>[m.id,label(m)])],'')
  by('scale-label').hidden=!models.length
- const context=coverageInfo(group,models,sources),panel=by('coverage');panel.replaceChildren(document.createTextNode(context.text))
- for(const source of context.links){const link=document.createElement('a');link.href=source.url;link.textContent=source.label;link.target='_blank';link.rel='noopener noreferrer';panel.append(link)}
  by('region-title').textContent=group.label;by('picker').hidden=true
  if(id==='western')globe.reset();else globe.focus(id)
  const delay=animate&&!matchMedia('(prefers-reduced-motion: reduce)').matches?420:0
