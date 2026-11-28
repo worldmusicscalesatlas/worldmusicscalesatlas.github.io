@@ -1,5 +1,13 @@
 # World Music Scales Atlas
 
+**An independent interactive research and educational platform for musical scales, modal systems, microtonal tunings and cultural music traditions.**
+
+Created and developed by [Dr. Pouya Hosseini](https://drpouyahosseini.github.io/).
+
+[Live atlas](https://worldmusicscalesatlas.github.io/) · [Reference library](https://worldmusicscalesatlas.github.io/reference.html) · [About](https://worldmusicscalesatlas.github.io/about.html) · [Licence](LICENSE)
+
+## Overview
+
 Start with D Dorian, or choose Shur to explore the Persian scale on any tonic. On a phone, add the Atlas to the home screen for standalone display. Select a geographic region to explore 393 documented tuning models across 65 populated geographical entries. Choose a regional scale, then drag the inner diatonic ring to transpose in 50-cent steps. The outer circle preserves the ordered intervals. Compare Scales aligns octave models on concentric rings and measured open spans on a shared cent axis. Source interpretations remain under review.
 
 The public catalog contains app-facing model metadata, tuning intervals, references and geographic navigation. The research workbooks and notes are private.
@@ -10,9 +18,9 @@ The public catalog contains app-facing model metadata, tuning intervals, referen
 
 Run `python3 -m http.server 8000` from the project directory and visit http://localhost:8000. The application runs in the browser. Run `node --test atlas.test.mjs` with Node 22 or later to check the examples and diagrams.
 
-## Credits and reuse
+## Authorship, licensing and attribution
 
-Created by Dr. Pouya Hosseini. The [license](LICENSE) covers original project material. The basemap uses [Natural Earth](https://www.naturalearthdata.com/about/terms-of-use/) public-domain relief and country outlines. Citations accompany the research models. Seven named Western diatonic modes are available alongside the regional collection. See the [Copyright & Terms of Use](https://worldmusicscalesatlas.github.io/about.html#terms) for the rights reservation covering original materials. Third-party references retain their respective rights.
+Created by Dr. Pouya Hosseini. Original protected Atlas materials are proprietary under the [licence and third-party rights notice](LICENSE); this is not a general open-source licence. GitHub platform rights, applicable statutory exceptions and third-party licences remain unaffected. DaMuSc-derived CC BY 4.0 contributions remain reusable under that licence, including commercially with attribution. The basemap uses [Natural Earth](https://www.naturalearthdata.com/about/terms-of-use/) public-domain relief and country outlines. Citations accompany the research models. Seven named Western diatonic modes are available alongside the regional collection. See the [Copyright & Terms of Use](https://worldmusicscalesatlas.github.io/terms.html) for the rights reservation covering original materials. Third-party references retain their respective rights.
 
 ## Research expansion (Batch 02)
 
