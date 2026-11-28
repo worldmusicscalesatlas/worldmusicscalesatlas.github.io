@@ -1,6 +1,6 @@
 # World Music Scales Atlas
 
-Start with D Dorian, or choose Shur to explore the Persian scale on any tonic. On a phone, add the Atlas to the home screen for standalone display. Select a geographic region to explore 283 documented tuning models across 30 populated geographical entries. Choose a regional scale, then drag the inner diatonic ring to transpose in 50-cent steps. The outer circle preserves the ordered intervals. Compare Scales aligns octave models on concentric rings and measured open spans on a shared cent axis. Source interpretations remain under review.
+Start with D Dorian, or choose Shur to explore the Persian scale on any tonic. On a phone, add the Atlas to the home screen for standalone display. Select a geographic region to explore 289 documented tuning models across 33 populated geographical entries. Choose a regional scale, then drag the inner diatonic ring to transpose in 50-cent steps. The outer circle preserves the ordered intervals. Compare Scales aligns octave models on concentric rings and measured open spans on a shared cent axis. Source interpretations remain under review.
 
 The public catalog contains app-facing model metadata, tuning intervals, references and geographic navigation. The research workbooks and notes are private.
 
@@ -43,3 +43,7 @@ Three measured Brazilian pífano profiles from Mendes (2012), frequency Tables 1
 Only traditions with playable numerical models appear in public navigation. Deferred research records are preserved separately from the public application. The numerical and cultural reuse review standards remain unchanged. No private research notes, song transcriptions, recordings or restricted cultural data are included.
 
 The Atlas acknowledges the [CARE Principles](https://doi.org/10.5334/dsj-2020-043), [Local Contexts community-defined TK Labels](https://localcontexts.org/labels/traditional-knowledge-labels/), and relevant community-specific governance; it does not self-assign labels or claim compliance or approval without collaboration. Anchors are approximate navigation aids, not territorial claims.
+
+## Research expansion (Batches 15–18)
+
+Six source-specific additions: three Esmeraldas marimba profiles (Pontón Yépez 2022, Partitura 61; row counts and first intervals checked against p. 165), two contemporary equal-tempered Mandé kora teaching examples (not measured historical tunings), and one sixteen-reed Isan khene inventory (Musib et al. 2025). Conflicting khene fundamentals were resolved against the stated harmonic series and FFT peaks; the two near-unison G4 reeds are retained. The fourth Esmeraldas profile is withheld because the extracted row has an inconsistent count. Primary text was accessible, but rendered PDF pages could not be retrieved; no visual verification claimed. No new Inuit or other Indigenous song-derived models, ambiguous museum provenance, or empty markers are published. All 283 previous model records are unchanged. Only instrument facts and independently calculated theoretical pitch geometry are used; no source figures, recordings or songs reproduced, no community endorsement asserted. Further cultural and source review remains open.
