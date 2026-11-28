@@ -1,6 +1,6 @@
 # World Music Scales Atlas
 
-Start with D Dorian, or choose Shur to explore the Persian scale on any tonic. On a phone, add the Atlas to the home screen for standalone display. Select a geographic region to explore 310 documented tuning models across 45 populated geographical entries. Choose a regional scale, then drag the inner diatonic ring to transpose in 50-cent steps. The outer circle preserves the ordered intervals. Compare Scales aligns octave models on concentric rings and measured open spans on a shared cent axis. Source interpretations remain under review.
+Start with D Dorian, or choose Shur to explore the Persian scale on any tonic. On a phone, add the Atlas to the home screen for standalone display. Select a geographic region to explore 315 documented tuning models across 46 populated geographical entries. Choose a regional scale, then drag the inner diatonic ring to transpose in 50-cent steps. The outer circle preserves the ordered intervals. Compare Scales aligns octave models on concentric rings and measured open spans on a shared cent axis. Source interpretations remain under review.
 
 The public catalog contains app-facing model metadata, tuning intervals, references and geographic navigation. The research workbooks and notes are private.
 
@@ -70,3 +70,7 @@ All 305 previous models are preserved. All 45 geographical entries contain playa
 ## Search and reference library
 
 The public reference pages, XML sitemap, robots.txt and llms.txt are generated from the existing public catalog and built-in modes. Run `npm run seo:generate` after changing those data, then `npm run seo:check` to verify freshness. The interactive atlas remains independent of the static pages. Submit `https://worldmusicscalesatlas.github.io/sitemap.xml` in Google Search Console and Bing Webmaster Tools after deployment. Search and training crawler controls are separate; crawler directives are voluntary, and all existing copyright and cultural rights remain in effect.
+
+## Research expansion (Batch 27 — Mongolia)
+
+Five source-linked theoretical pentatonic octave species from Luvsangenden (2023, pp. 21–22), discussing Jantsannorov (1983), with contextual confirmation from the UNESCO traditional Mongolian music album booklet. The numbering is editorial and the 12-TET geometry is not measured intonation. Long-song modal shifts and microtonal ornamentation are not reproduced. The original 1983 article and PDF page images were unavailable; the extracted dissertation and booklet text were inspected. No traditional mode names, recordings, song transcriptions or community endorsement are asserted. All 310 prior records are preserved.
