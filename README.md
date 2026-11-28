@@ -63,3 +63,10 @@ See the complete [Copyright & Terms of Use](https://worldmusicscalesatlas.github
 ## Feedback and collaboration
 
 Scientific corrections, methodological feedback and cultural concerns are welcome through the [issue tracker](https://github.com/worldmusicscalesatlas/worldmusicscalesatlas.github.io/issues). For research collaboration and licensing enquiries, visit the [creator's official website](https://drpouyahosseini.github.io/).
+
+## Related projects
+
+- [Dr. Pouya Hosseini — official website](https://drpouyahosseini.github.io/)
+- [Persian Music Scales — educational hub](https://persianmusicscales.github.io/)
+- [Persian Music Scales App](https://persianmusicscales.github.io/Persian-Music-Scales-App/)
+- [Urmawī Advar Atlas](https://persianmusicscales.github.io/urmawi-advar-atlas/)
