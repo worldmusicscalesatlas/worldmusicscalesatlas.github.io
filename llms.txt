@@ -25,11 +25,13 @@
 - [Bali — gong kebyar](https://worldmusicscalesatlas.github.io/traditions/b28-bali.html): 11 models.
 - [Bolivia — contemporary professional quena](https://worldmusicscalesatlas.github.io/traditions/b19-bolivia-quena.html): 1 models.
 - [Brazil — Cariri pífano](https://worldmusicscalesatlas.github.io/traditions/b11-brazil-cariri.html): 3 models.
+- [Burkina Faso — Sambla xylophone](https://worldmusicscalesatlas.github.io/traditions/b37-burkina-sambla.html): 3 models.
 - [Burmese instrumental tuning](https://worldmusicscalesatlas.github.io/traditions/b09-myanmar.html): 3 models.
 - [Byzantine chant](https://worldmusicscalesatlas.github.io/traditions/byzantine.html): 4 models.
 - [Cambodia — Khmer scale theory](https://worldmusicscalesatlas.github.io/traditions/b22-cambodia-khmer.html): 2 models.
 - [Carnatic classical](https://worldmusicscalesatlas.github.io/traditions/carnatic.html): 72 models.
 - [China](https://worldmusicscalesatlas.github.io/traditions/china.html): 5 models.
+- [China — flute and bronze bell measurements](https://worldmusicscalesatlas.github.io/traditions/b36-china-instruments.html): 9 models.
 - [Colombian Pacific marimba](https://worldmusicscalesatlas.github.io/traditions/b08-colombia.html): 9 models.
 - [Contemporary Native American flute](https://worldmusicscalesatlas.github.io/traditions/native-flute.html): 1 models.
 - [Finland — five-string kantele](https://worldmusicscalesatlas.github.io/traditions/b30-finland.html): 2 models.
@@ -43,24 +45,30 @@
 - [Iran](https://worldmusicscalesatlas.github.io/traditions/iran.html): 15 models.
 - [Japan — Japanese modal theory and koto](https://worldmusicscalesatlas.github.io/traditions/b03-japan.html): 5 models.
 - [Japanese shakuhachi](https://worldmusicscalesatlas.github.io/traditions/b26-japan-shakuhachi.html): 1 models.
+- [Jiahu — Neolithic bone flutes](https://worldmusicscalesatlas.github.io/traditions/b32-jiahu.html): 3 models.
 - [Jujuy siku — fieldwork pitch reference](https://worldmusicscalesatlas.github.io/traditions/b23-jujuy-siku.html): 1 models.
 - [Korean pansori](https://worldmusicscalesatlas.github.io/traditions/b05-korea.html): 5 models.
 - [Kufuna Kandonga — southeastern Angolan likembe](https://worldmusicscalesatlas.github.io/traditions/b09-angola.html): 5 models.
 - [Lao khene — Isan instrument study](https://worldmusicscalesatlas.github.io/traditions/b18-isan-khene.html): 1 models.
 - [Lithuanian monophonic folk singing](https://worldmusicscalesatlas.github.io/traditions/b26-lithuania-vocal.html): 6 models.
 - [Madagascar — valiha](https://worldmusicscalesatlas.github.io/traditions/b20-madagascar-valiha.html): 1 models.
+- [Malawi — Asena instrument tunings](https://worldmusicscalesatlas.github.io/traditions/b31-malawi-measured.html): 26 models.
 - [Mandé kora — modern teaching tunings](https://worldmusicscalesatlas.github.io/traditions/b17-mande-kora.html): 2 models.
 - [Mandinka balo — Gambia](https://worldmusicscalesatlas.github.io/traditions/b20-gambia-balo.html): 1 models.
 - [Mangwilo xylophone](https://worldmusicscalesatlas.github.io/traditions/mozambique.html): 1 models.
 - [Mongolia](https://worldmusicscalesatlas.github.io/traditions/b27-mongolia.html): 5 models.
 - [Nicaragua — marimba de arco](https://worldmusicscalesatlas.github.io/traditions/b23-nicaragua-marimba.html): 1 models.
+- [Norway — Hardanger fiddle](https://worldmusicscalesatlas.github.io/traditions/b34-norway-hardanger.html): 1 models.
 - [Philippines — Maranao kolintang](https://worldmusicscalesatlas.github.io/traditions/b29-maranao.html): 2 models.
 - [Ryukyuan music](https://worldmusicscalesatlas.github.io/traditions/b03-ryukyu.html): 1 models.
 - [Scottish Highland bagpipe](https://worldmusicscalesatlas.github.io/traditions/b10-scotland.html): 1 models.
 - [Shona mbira](https://worldmusicscalesatlas.github.io/traditions/zimbabwe.html): 2 models.
+- [Sweden — spilåpipa](https://worldmusicscalesatlas.github.io/traditions/b35-sweden-flute.html): 2 models.
+- [Tanzania — ilimba](https://worldmusicscalesatlas.github.io/traditions/b38-tanzania-ilimba.html): 1 models.
 - [Thai classical instrumental tuning](https://worldmusicscalesatlas.github.io/traditions/b03-thailand.html): 4 models.
 - [Trinidad and Tobago — steelpan](https://worldmusicscalesatlas.github.io/traditions/b23-trinidad-steelpan.html): 1 models.
 - [Türkiye](https://worldmusicscalesatlas.github.io/traditions/turkiye.html): 39 models.
+- [Uganda — Gisu ludaya](https://worldmusicscalesatlas.github.io/traditions/b33-uganda-ludaya.html): 1 models.
 - [Vietnam — Huế chamber music](https://worldmusicscalesatlas.github.io/traditions/b21-vietnam-hue.html): 2 models.
 - [West African bala — Würzburg specimens](https://worldmusicscalesatlas.github.io/traditions/b25-west-african-bala.html): 3 models.
 - [Western diatonic modes](https://worldmusicscalesatlas.github.io/traditions/western.html): 7 models.

@@ -22,3 +22,5 @@ These terms cover original source code, software architecture and implementation
 
 Map relief, country outlines and geographic selection imagery derive from Natural Earth public-domain raster and vector data. https://www.naturalearthdata.com/about/terms-of-use/
 Source citations appear in the Info panel for each documented model. The app uses system fonts and native browser graphics and audio APIs.
+
+DaMuSc-derived database contributions (identified by source_database_id and source B35-DAMUSC-2023) retain their CC BY 4.0 license, including commercial reuse with attribution. Compilation © 2022–2026 John M. McBride and contributors. Citation: McBride, Passmore & Tlusty (2023), doi:10.1371/journal.pone.0284851. The Atlas adapts selected raw interval rows with its own labels, evidence annotations and visualization. No additional restrictions in these terms apply to the CC BY licensed contributions. Underlying publications, media and community rights are not relicensed. https://github.com/jomimc/DaMuSc/blob/main/LICENSE.md — https://creativecommons.org/licenses/by/4.0/
