@@ -1,6 +1,6 @@
 # World Music Scales Atlas
 
-Start with D Dorian, or choose Shur to explore the Persian scale on any tonic. On a phone, add the Atlas to the home screen for standalone display. Select a geographic region to explore 305 documented tuning models across 42 populated geographical entries. Choose a regional scale, then drag the inner diatonic ring to transpose in 50-cent steps. The outer circle preserves the ordered intervals. Compare Scales aligns octave models on concentric rings and measured open spans on a shared cent axis. Source interpretations remain under review.
+Start with D Dorian, or choose Shur to explore the Persian scale on any tonic. On a phone, add the Atlas to the home screen for standalone display. Select a geographic region to explore 310 documented tuning models across 45 populated geographical entries. Choose a regional scale, then drag the inner diatonic ring to transpose in 50-cent steps. The outer circle preserves the ordered intervals. Compare Scales aligns octave models on concentric rings and measured open spans on a shared cent axis. Source interpretations remain under review.
 
 The public catalog contains app-facing model metadata, tuning intervals, references and geographic navigation. The research workbooks and notes are private.
 
@@ -55,3 +55,13 @@ Seven documented pitch representations in five populated geographic entries: a n
 ## Research expansion (Batches 23–26)
 
 Nine scoped additions: a nominal 22-key Nicaraguan marimba de arco inventory (Grinnell College item 3446); twelve measured outer-register fundamentals of a soprano steelpan (Maloney 2010, Table 4.1; 1–3 Hz accelerometer mass-loading caveat); Gerald Eze’s publicly described one-octave Igbo ubọ-aka teaching tuning (Carter-Ényì 2024, §5.1); and six absolute, non-normalized I–V cluster-mean interval profiles from Lithuanian monophonic singing (Budrys & Višnevska 2014, Table 4). The latter are aggregate pitch profiles, not individual songs or complete octave scales. Source text and methodology inspected; PDF page images were unavailable. The Igbo extended-range example was withheld due to ambiguous octave marks. The two more limited Lithuanian I/II/IV/V subsets were not added. No Arctic, Oceanian or other restricted community materials published; Indigenous candidate permissions remain unresolved. No instrument photographs, recordings, song transcriptions or source figures reproduced; community endorsement is not asserted. All 296 existing model records are unchanged. No empty markers.
+
+## Follow-up verification (Batches 23–26)
+
+- López's Jujuy fieldwork supports a 13-pitch nominal Malta inventory starting on D within the G-major collection.
+- Würzburg's museum data supports three measured bala excerpts. These retain their measured spans and are scoped to individual specimens of unspecified national provenance.
+- Utsugi and Moriyama report the basic shakuhachi note names. Ando documents the octave repetitions and sounding-pitch variability. The model uses the nominal octave reference.
+- Zemp's original Malaita fieldwork confirms the approximate equiheptatonic practice behind the existing ’au tahana model. The theoretical seven-equal-step reference already covers this candidate.
+- Conlon's chapter identifies the Iglulik drum-dance song “I'm So Happy” and lists five note names in a speculative reconstruction based on the song. The underlying score and cultural reuse review remain unresolved, so this inventory stays deferred. [Primary chapter](https://www.perlego.com/book/2382494/music-of-the-first-nations-tradition-and-innovation-in-native-north-america-pdf?partner_id=100014)
+
+All 305 previous models are preserved. All 45 geographical entries contain playable models.
