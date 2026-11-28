@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this software in research, please cite it and the original sources of individual tuning models. See LICENSE for rights and third-party terms."
+title: "World Music Scales Atlas"
+type: software
+authors:
+  - family-names: Hosseini
+    given-names: Pouya
+repository-code: "https://github.com/worldmusicscalesatlas/worldmusicscalesatlas.github.io"
+url: "https://worldmusicscalesatlas.github.io/"
