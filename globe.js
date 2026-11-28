@@ -1,4 +1,4 @@
-import {coverageLabel} from './coverage.js?v=batch11-14'
+import {coverageLabel} from './coverage.js?v=playable-only'
 /** A static Earth texture projected analytically onto a sphere; no tiles or GIS service. */
 const DEG = Math.PI / 180;
 const BASE = { lon: 44, lat: 23, scale: 1 };
@@ -119,6 +119,7 @@ function centerCoordinates(sx,sy,view) {
 
 /** The host supplies accessible region navigation plus zoom/reset buttons. */
 export function mountGlobe(container, geography, onSelect) {
+  geography=geography.filter(g=>g.model_ids.length&&g.coverage_status!=='context_only');
   const view = {...BASE};
   const layer = document.createElement('div');
   layer.style.cssText = 'position:absolute;inset:0;isolation:isolate;color:#eff8ef;overflow:hidden;font:14px system-ui,sans-serif';
@@ -203,11 +204,11 @@ export function mountGlobe(container, geography, onSelect) {
     pins=geography.map(project).filter(p=>p.z>.025&&p.x>=0&&p.x<=width&&p.y>=0&&p.y<=height);
     const selectedPin=pins.find(p=>p.g.id===selected);
     for(const p of pins){
-      const active=p.g.id===selected, gap=!p.g.model_ids.length;
-      const color=gap?'#a9deec':'#ffcf7a';
-      ctx.beginPath(); ctx.arc(p.x,p.y,active?12:8,0,Math.PI*2);ctx.fillStyle=gap?'#63c5d52e':'#ffe1a329';ctx.fill();
+      const active=p.g.id===selected;
+      const color='#ffcf7a';
+      ctx.beginPath(); ctx.arc(p.x,p.y,active?12:8,0,Math.PI*2);ctx.fillStyle='#ffe1a329';ctx.fill();
       ctx.beginPath(); ctx.arc(p.x,p.y,active?7:4.8,0,Math.PI*2);
-      ctx.fillStyle=gap?'#15343d':color; ctx.fill();ctx.strokeStyle=gap?color:'#533c21';ctx.lineWidth=gap?1.7:1.2;ctx.stroke();
+      ctx.fillStyle=color; ctx.fill();ctx.strokeStyle='#533c21';ctx.lineWidth=1.2;ctx.stroke();
       if(active){ ctx.beginPath();ctx.arc(p.x,p.y,12,0,Math.PI*2);ctx.strokeStyle=color;ctx.lineWidth=1;ctx.stroke(); }
     }
     const boxes=[];
