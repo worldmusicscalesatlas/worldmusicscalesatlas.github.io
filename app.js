@@ -3,7 +3,7 @@ import {modes,solfege} from './modes.js'
 import {esc} from './diagrams.js'
 import {nearestDegree} from './compare.js'
 import {positions,fmt,signed} from './theory.js'
-import {wheel,notation,rotateTonic,rotateModel,tonicName} from './wheel.js?v=studio8'
+import {wheel,notation,rotateTonic,rotateModel,tonicName} from './wheel.js?v=batch02'
 import {mountGlobe} from './globe.js?v=touch5'
 const by=id=>document.getElementById(id)
 const query=new URLSearchParams(location.search)
@@ -29,7 +29,7 @@ let active=null,region='',menuTimer,playing=false
 let voice='play'
 const audio=player(isPlaying=>{
  playing=isPlaying
- by('play').textContent=isPlaying&&voice==='play'?'■ Stop':'▶ Play scale'
+ by('play').textContent=isPlaying&&voice==='play'?'■ Stop':(active?.reference_pitch_only?'▶ Play pitches':'▶ Play scale')
  by('audition').textContent=isPlaying&&voice==='audition'?'■ Stop comparison':'▶ Play comparison'
 })
 function storeView(push=false){
@@ -64,7 +64,7 @@ function home(push=false){
 }
 function openScale(m,start=0,push=true){
  clearTimeout(menuTimer);audio.stop();active=m;region=m.geo_id
- degree=m.circle_ready&&Number.isInteger(Number(start))&&start>=0&&start<m.notes_count?Number(start):0
+ degree=m.circle_ready&&!m.reference_pitch_only&&Number.isInteger(Number(start))&&start>=0&&start<m.notes_count?Number(start):0
  by('detail').hidden=false;by('atlas').hidden=true
  for(const [button,panel] of [['info','explanation'],['signature','score'],['compare','compare-panel']]){by(button).setAttribute('aria-expanded','false');by(panel).hidden=true}
  render();storeView(push);window.scrollTo(0,0);by('title').focus({preventScroll:true})
@@ -74,13 +74,14 @@ function render(){
  if(!active)return
  const m=current(),t=tonic,ref='Major',other=lookup(by('comparison').value)
  const name=active.geo_id==='western'?modes[(modes.indexOf(active)+degree)%7].name:active.name
- by('title').textContent=tonicName(t,pref)+' '+name+(degree&&active.geo_id!=='western'?' · rotation '+(degree+1):'')
+ by('title').textContent=(active.reference_pitch_only?'Reference ':'')+tonicName(t,pref)+' '+name+(degree&&active.geo_id!=='western'?' · rotation '+(degree+1):'')
+ if(!playing)by('play').textContent=active.reference_pitch_only?'▶ Play pitches':'▶ Play scale'
  by('subtitle').textContent=[active.local_script,active.tradition,active.category,active.variant].filter(Boolean).join(' · ')
  by('panels').innerHTML='<div '+'class="interactive-wheel" tabindex="0" aria-label="Diatonic ring. Use left and right arrows to transpose."'+'>'+wheel(m,t,pref,ref,other)+'</div>'+'<p class="dial-tip">Drag to transpose · Tap left or right for ±50¢</p>'
  by('steps').textContent='Steps in cents · '+m.intervals_cents.map(fmt).join(' · ')
  by('score').querySelector('.content').innerHTML=notation(m,t,pref,ref)
  const refs=active.source_ids.map(id=>sources.find(s=>s.id===id)).filter(Boolean)
- by('explanation').querySelector('.content').innerHTML='<h2>About this tuning</h2><p>'+esc([active.name,active.tradition,active.tuning_model].filter(Boolean).join(' · '))+'</p><p>'+(m.circle_ready?'Read clockwise from the top. Each colored arc spans one step between successive scale notes. Its width shows the interval size in cents (100¢ = one equal-tempered semitone). The inner letters are diatonic reference notes. Drag them to change the tonic. Signature lists the sounding notes and their exact alterations.':'This open span ends at its documented final pitch.')+'</p>'+refs.map(s=>'<p><a href="'+esc(s.url)+'">'+esc(s.citation)+'</a></p>').join('')+(refs.length?'<small>Source interpretation under review.</small>':'')
+ by('explanation').querySelector('.content').innerHTML='<h2>About this tuning</h2><p>'+esc([active.name,active.tradition,active.tuning_model].filter(Boolean).join(' · '))+'</p>'+(active.context_note?'<p>'+esc(active.context_note)+'</p>':'')+'<p>'+(m.circle_ready?'Read clockwise from the top. Each colored arc spans one step between successive scale notes. Its width shows the interval size in cents (100¢ = one equal-tempered semitone). The inner letters are diatonic reference notes. Drag them to transpose the reference pitch. Signature lists the sounding notes and their exact alterations.':'This open span ends at its documented final pitch.')+'</p>'+refs.map(s=>'<p><a href="'+esc(s.url)+'">'+esc(s.citation)+'</a></p>').join('')+(refs.length?'<small>Source interpretation under review.</small>':'')
  by('compare').classList.toggle('active',Boolean(other))
  by('compare').setAttribute('aria-label',other?'Compare · '+other.name:'Compare')
  by('remove-comparison').hidden=!other
@@ -148,7 +149,7 @@ function inspect(e){
  const layer=Number(segment.dataset.layer),i=Number(segment.dataset.degree)
  const models=[current(),lookup(by('comparison').value)],m=models[layer],other=models[1-layer]
  const pitch=positions(m.intervals_cents)[i]
- let message=m.name+' · degree '+(i+1)+' · '+fmt(pitch)+'¢ from tonic · next step '+fmt(m.intervals_cents[i])+'¢'
+ let message=m.name+' · degree '+(i+1)+' · '+fmt(pitch)+(m.reference_pitch_only?'¢ from reference pitch · next step ':'¢ from tonic · next step ')+fmt(m.intervals_cents[i])+'¢'
  for(const g of by('panels').querySelectorAll('.selected-degree'))g.classList.remove('selected-degree')
  segment.classList.add('selected-degree')
  if(other){
