@@ -19,7 +19,7 @@ import {readFileSync} from 'node:fs'
 import {wheel,rotateModel,rotateTonic,notation} from './wheel.js'
 const catalog=JSON.parse(readFileSync(new URL('./catalog.json',import.meta.url)))
 test('Every geographic model is selectable and transposable through 24 ring positions',()=>{
- assert.equal(catalog.scales.length,240)
+ assert.equal(catalog.scales.length,269)
  for(const m of catalog.scales){
   assert.ok(catalog.regions.find(g=>g.id===m.geo_id).model_ids.includes(m.id))
   for(let t=0;t<12;t+=.5){
@@ -69,7 +69,7 @@ test('Batch 02 Javanese observations preserve the verified source values and dis
  const expected=[["EXP-IDN-ELLIS-1885-SLENDRO-MEAN",[228,256,244,232,240],true,5],["EXP-IDN-ELLIS-1885-SLENDRO-LOWER-GENDER",[191,251,249,261,220],false,6],["EXP-IDN-ELLIS-1885-SLENDRO-UPPER-GENDER",[219,256,261,223,288],false,6],["EXP-IDN-ELLIS-1885-SLENDRO-LAND-SARON",[270,200,266,239,243],false,6],["EXP-IDN-ELLIS-1885-PELOG-INVENTORY",[137,309,129,112,133,278,102],true,7],["EXP-IDN-ELLIS-1885-PELOG-DANGSOE",[137,550,133,278,102],true,5],["EXP-IDN-ELLIS-1885-PELOG-BEM-ELLIS",[137,438,112,411,102],true,5],["EXP-IDN-ELLIS-1885-PELOG-BEM-LAND",[147,416,96,429,112],true,5],["EXP-IDN-ELLIS-1885-PELOG-BARANG-ELLIS",[137,438,112,133,380],true,5],["EXP-IDN-ELLIS-1885-PELOG-BARANG-LAND",[151,426,111,179,333],true,5]]
  const region=catalog.regions.find(g=>g.id==='exp-idn')
  assert.ok(region);assert.deepEqual(region.country_iso3_for_navigation,['IDN'])
- assert.equal(catalog.regions.length,22);assert.equal(catalog.sources.length,44)
+ assert.equal(catalog.regions.length,28);assert.equal(catalog.sources.length,54)
  assert.deepEqual(region.model_ids,expected.map(row=>row[0]))
  for(const [id,steps,circular,n] of expected){
   const model=catalog.scales.find(m=>m.id===id)
@@ -114,4 +114,17 @@ test('Batch 04 preserves Azerbaijani theoretical ranges and Thai measured spans'
  assert.equal(catalog.sources.find(s=>s.id==='B04-TH-WISUTTIPAT-2015').license,'CC BY 4.0')
  assert.equal(catalog.scales.filter(m=>m.id.startsWith('B04-AZ-')).length,4)
  assert.equal(catalog.scales.filter(m=>m.id.startsWith('B03-TH-')).length,4)
+})
+
+test('Batches 05–08 retain documented pitch ranges, original tuning sequences and provenance',()=>{
+ const expected=[["B05-KR-01","b05-korea",[200,300,200,200],false,5],["B05-KR-02","b05-korea",[200,300,200,300],false,5],["B05-KR-03","b05-korea",[300,200,200,300],false,5],["B05-KR-04","b05-korea",[200,300,200,200],false,5],["B05-KR-05","b05-korea",[200,300,200,300],false,5],["B06-ET-M0159","b06-ethiopia",[353,195,171,291],false,5],["B06-ET-M0161","b06-ethiopia",[338,202,197,268],false,5],["B06-ET-M0162","b06-ethiopia",[375,179,205,332],false,5],["B06-ET-M0164","b06-ethiopia",[326,228,158,272],false,5],["B06-ET-M0165","b06-ethiopia",[309,222,161,322],false,5],["B06-ET-M0166","b06-ethiopia",[308,174,175,342],false,5],["B06-ET-M0176","b06-ethiopia",[367,127,194,387],false,5],["B06-ET-M0179","b06-ethiopia",[348,183,209,303],false,5],["B06-ET-M0180","b06-ethiopia",[351,179,182,351],false,5],["B06-ET-M0183","b06-ethiopia",[344,194,144,372],false,5],["B06-ET-M0185","b06-ethiopia",[384,187,162,329],false,5],["B06-ET-M0186","b06-ethiopia",[333,172,195,390],false,5],["B07-HU-01","b07-hungary",[300,200,200,300,200],true,5],["B07-ES-01","b07-andalusia",[100,300,100,200,100,300,100],true,7],["B08-SB-01","b08-areare",[171.42857142857142,171.42857142857142,171.42857142857142,171.42857142857142,171.42857142857142,171.42857142857142,171.42857142857142],true,7],["B08-CO-M1","b08-colombia",[70,260,90,155,205,120,170,205,105,180,200,120,190,170,160,190],false,17],["B08-CO-M2","b08-colombia",[210,210,130,170,170,190,120,190,150,250,110,200,100],false,14],["B08-CO-M3","b08-colombia",[140,145,140,160,200,140,180,160,140,150,190,155,145,220,135,155,170,180,200],false,20],["B08-CO-M4","b08-colombia",[180,160,150,180,150,160,155,155,170,170,170,190,135,165,160,180,170,165,155],false,20],["B08-CO-M5","b08-colombia",[210,150,160,160,210,140,160,170,170,170,170,160,160,160,150,160,210,160,120,150,100],false,22],["B08-CO-M6","b08-colombia",[100,110,70,190,200,190,140,160,180,150,150,200,150,170,100,190,100],false,18],["B08-CO-M7","b08-colombia",[150,240,125,195,135,160,210,110,145,190,155,170,205,180,175,160,150,180,155,180,130,230,130],false,24],["B08-CO-M8","b08-colombia",[205,130,165,195,145,185,120,150,135,145,240,165,145,185,180,105,135],false,18],["B08-CO-M9","b08-colombia",[150,190,80,100,160,140,180,160,150,195,155,130,170,205,120,270,135,130,210,120,190,90],false,23]]
+ for(const [id,geo,steps,circular,n] of expected){
+  const m=catalog.scales.find(s=>s.id===id);assert.ok(m);assert.equal(m.geo_id,geo)
+  assert.deepEqual(m.intervals_cents,steps);assert.equal(m.circle_ready,circular);assert.equal(m.notes_count,n)
+  assert.ok(m.context_note);assert.equal(m.reference_pitch_only,true);assert.ok(m.source_ids.every(id=>catalog.sources.some(s=>s.id===id)))
+  assert.deepEqual(rotateModel(m,1).intervals_cents,steps);assert.match(wheel(m,0,'Sharps','Major'),/REFERENCE/)
+  assert.doesNotMatch(wheel(m,2.5,'Sharps','Major',modes[0]),/undefined|NaN/)
+  if(id.startsWith('B06-ET-'))assert.equal(steps.reduce((a,b)=>a+b,0),m.reported_span_cents)
+ }
+ assert.equal(catalog.scales.filter(m=>/^B0[5-8]-/.test(m.id)).length,29)
 })
