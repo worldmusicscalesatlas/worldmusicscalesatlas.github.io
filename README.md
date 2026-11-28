@@ -1,6 +1,6 @@
 # World Music Scales Atlas
 
-Start with D Dorian, or choose Shur to explore the Persian scale on any tonic. On a phone, add the Atlas to the home screen for standalone display. Select a geographic region to explore 315 documented tuning models across 46 populated geographical entries. Choose a regional scale, then drag the inner diatonic ring to transpose in 50-cent steps. The outer circle preserves the ordered intervals. Compare Scales aligns octave models on concentric rings and measured open spans on a shared cent axis. Source interpretations remain under review.
+Start with D Dorian, or choose Shur to explore the Persian scale on any tonic. On a phone, add the Atlas to the home screen for standalone display. Select a geographic region to explore 330 documented tuning models across 49 populated geographical entries. Choose a regional scale, then drag the inner diatonic ring to transpose in 50-cent steps. The outer circle preserves the ordered intervals. Compare Scales aligns octave models on concentric rings and measured open spans on a shared cent axis. Source interpretations remain under review.
 
 The public catalog contains app-facing model metadata, tuning intervals, references and geographic navigation. The research workbooks and notes are private.
 
@@ -74,3 +74,7 @@ The public reference pages, XML sitemap, robots.txt and llms.txt are generated f
 ## Research expansion (Batch 27 — Mongolia)
 
 Five source-linked theoretical pentatonic octave species from Luvsangenden (2023, pp. 21–22), discussing Jantsannorov (1983), with contextual confirmation from the UNESCO traditional Mongolian music album booklet. The numbering is editorial and the 12-TET geometry is not measured intonation. Long-song modal shifts and microtonal ornamentation are not reproduced. The original 1983 article and PDF page images were unavailable; the extracted dissertation and booklet text were inspected. No traditional mode names, recordings, song transcriptions or community endorsement are asserted. All 310 prior records are preserved.
+
+## Research expansion (Batches 28–30)
+
+Eleven five-degree pengisep pitch profiles from Shiokawa et al. (2016, Table 2), two Maranao kolintang instrument inventories from Cadar and Garfias (1996, p. 122), and two modern five-string Finnish kantele replica tunings reported by Kastinen (2018). Original PDF table images inspected for the first two sources. The Balinese averages are not individual measured octaves; the Maranao frequency profiles retain their measured spans; the kantele models encode nominal note names rather than acoustic measurements. No octave closure imposed, no source figures or recordings reproduced, and no claim of cultural endorsement. All 315 previous records preserved. Other coverage candidates remain under research and cultural reuse review.

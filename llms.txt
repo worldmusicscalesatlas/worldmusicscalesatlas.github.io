@@ -22,6 +22,7 @@
 - [Arabic-speaking regions](https://worldmusicscalesatlas.github.io/traditions/arabic.html): 59 models.
 - [Asena / Sena bangwe](https://worldmusicscalesatlas.github.io/traditions/malawi.html): 1 models.
 - [Azerbaijani muğam](https://worldmusicscalesatlas.github.io/traditions/b04-azerbaijan.html): 4 models.
+- [Bali — gong kebyar](https://worldmusicscalesatlas.github.io/traditions/b28-bali.html): 11 models.
 - [Bolivia — contemporary professional quena](https://worldmusicscalesatlas.github.io/traditions/b19-bolivia-quena.html): 1 models.
 - [Brazil — Cariri pífano](https://worldmusicscalesatlas.github.io/traditions/b11-brazil-cariri.html): 3 models.
 - [Burmese instrumental tuning](https://worldmusicscalesatlas.github.io/traditions/b09-myanmar.html): 3 models.
@@ -31,6 +32,7 @@
 - [China](https://worldmusicscalesatlas.github.io/traditions/china.html): 5 models.
 - [Colombian Pacific marimba](https://worldmusicscalesatlas.github.io/traditions/b08-colombia.html): 9 models.
 - [Contemporary Native American flute](https://worldmusicscalesatlas.github.io/traditions/native-flute.html): 1 models.
+- [Finland — five-string kantele](https://worldmusicscalesatlas.github.io/traditions/b30-finland.html): 2 models.
 - [Ganda harp](https://worldmusicscalesatlas.github.io/traditions/uganda.html): 1 models.
 - [Georgian chant — Erkomaishvili corpus](https://worldmusicscalesatlas.github.io/traditions/b09-georgia.html): 2 models.
 - [Greek rebetiko / laiko](https://worldmusicscalesatlas.github.io/traditions/rebetiko.html): 1 models.
@@ -52,6 +54,7 @@
 - [Mangwilo xylophone](https://worldmusicscalesatlas.github.io/traditions/mozambique.html): 1 models.
 - [Mongolia](https://worldmusicscalesatlas.github.io/traditions/b27-mongolia.html): 5 models.
 - [Nicaragua — marimba de arco](https://worldmusicscalesatlas.github.io/traditions/b23-nicaragua-marimba.html): 1 models.
+- [Philippines — Maranao kolintang](https://worldmusicscalesatlas.github.io/traditions/b29-maranao.html): 2 models.
 - [Ryukyuan music](https://worldmusicscalesatlas.github.io/traditions/b03-ryukyu.html): 1 models.
 - [Scottish Highland bagpipe](https://worldmusicscalesatlas.github.io/traditions/b10-scotland.html): 1 models.
 - [Shona mbira](https://worldmusicscalesatlas.github.io/traditions/zimbabwe.html): 2 models.

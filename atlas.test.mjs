@@ -19,7 +19,7 @@ import {readFileSync} from 'node:fs'
 import {wheel,rotateModel,rotateTonic,notation} from './wheel.js'
 const catalog=JSON.parse(readFileSync(new URL('./catalog.json',import.meta.url)))
 test('Every geographic model is selectable and transposable through 24 ring positions',()=>{
- assert.equal(catalog.scales.length,315)
+ assert.equal(catalog.scales.length,330)
  for(const m of catalog.scales){
   assert.ok(catalog.regions.find(g=>g.id===m.geo_id).model_ids.includes(m.id))
   for(let t=0;t<12;t+=.5){
@@ -69,7 +69,7 @@ test('Batch 02 Javanese observations preserve the verified source values and dis
  const expected=[["EXP-IDN-ELLIS-1885-SLENDRO-MEAN",[228,256,244,232,240],true,5],["EXP-IDN-ELLIS-1885-SLENDRO-LOWER-GENDER",[191,251,249,261,220],false,6],["EXP-IDN-ELLIS-1885-SLENDRO-UPPER-GENDER",[219,256,261,223,288],false,6],["EXP-IDN-ELLIS-1885-SLENDRO-LAND-SARON",[270,200,266,239,243],false,6],["EXP-IDN-ELLIS-1885-PELOG-INVENTORY",[137,309,129,112,133,278,102],true,7],["EXP-IDN-ELLIS-1885-PELOG-DANGSOE",[137,550,133,278,102],true,5],["EXP-IDN-ELLIS-1885-PELOG-BEM-ELLIS",[137,438,112,411,102],true,5],["EXP-IDN-ELLIS-1885-PELOG-BEM-LAND",[147,416,96,429,112],true,5],["EXP-IDN-ELLIS-1885-PELOG-BARANG-ELLIS",[137,438,112,133,380],true,5],["EXP-IDN-ELLIS-1885-PELOG-BARANG-LAND",[151,426,111,179,333],true,5]]
  const region=catalog.regions.find(g=>g.id==='exp-idn')
  assert.ok(region);assert.deepEqual(region.country_iso3_for_navigation,['IDN'])
- assert.equal(catalog.regions.length,46);assert.equal(catalog.sources.length,75)
+ assert.equal(catalog.regions.length,49);assert.equal(catalog.sources.length,78)
  assert.deepEqual(region.model_ids,expected.map(row=>row[0]))
  for(const [id,steps,circular,n] of expected){
   const model=catalog.scales.find(m=>m.id===id)
@@ -157,14 +157,14 @@ test('Batches 11–14 preserve primary frequency observations',()=>{
  }
 })
 
-test('Public navigation contains only 46 playable geographic entries and linked references',()=>{
- assert.equal(catalog.scales.length,315);assert.equal(catalog.regions.length,46)
+test('Public navigation contains only 49 playable geographic entries and linked references',()=>{
+ assert.equal(catalog.scales.length,330);assert.equal(catalog.regions.length,49)
  assert.deepEqual(playableRegions(catalog.regions,catalog.scales),catalog.regions)
  const ids=new Set(catalog.scales.map(s=>s.id))
  for(const g of catalog.regions){assert.ok(g.model_ids.length);assert.ok(g.model_ids.every(id=>ids.has(id)&&catalog.scales.find(s=>s.id===id).geo_id===g.id));assert.equal(coverageLabel(g),g.model_ids.length+' models')}
- const assigned=catalog.regions.flatMap(g=>g.model_ids);assert.equal(assigned.length,315);assert.equal(new Set(assigned).size,315)
+ const assigned=catalog.regions.flatMap(g=>g.model_ids);assert.equal(assigned.length,330);assert.equal(new Set(assigned).size,330)
  for(const s of catalog.scales)assert.ok(assigned.includes(s.id))
- const referenced=new Set(catalog.scales.flatMap(m=>m.source_ids));assert.equal(referenced.size,75);assert.ok(catalog.sources.every(s=>referenced.has(s.id)))
+ const referenced=new Set(catalog.scales.flatMap(m=>m.source_ids));assert.equal(referenced.size,78);assert.ok(catalog.sources.every(s=>referenced.has(s.id)))
  const fake=[{id:'empty',model_ids:[]},{id:'missing',model_ids:['missing-id']},{id:'context',coverage_status:'context_only',model_ids:['example']},{id:'wrong',model_ids:['example']},{id:'ok',model_ids:['example']}]
  assert.deepEqual(playableRegions(fake,[{id:'example',geo_id:'ok'}]).map(g=>g.id),['ok'])
 })
@@ -219,3 +219,10 @@ test('Batch 27 Mongolian pentatonic forms preserve the five theoretical octave s
  const models=region.model_ids.map(id=>catalog.scales.find(m=>m.id===id));assert.deepEqual(models.map(m=>m.intervals_cents),expected);
  for(const m of models){assert.equal(m.notes_count,5);assert.equal(m.circle_ready,true);assert.equal(m.reference_pitch_only,true);assert.equal(m.intervals_cents.reduce((a,b)=>a+b,0),1200);assert.deepEqual(m.source_ids,["B27-MN-LUVSANGENDEN-2023","B27-MN-UNESCO-TRADITIONAL"]);assert.doesNotMatch(wheel(m,2.5,'Sharps','Major',modes[0]),/NaN|undefined/);}
 })
+
+
+test('Batches 28–30 preserve measured and nominal open-span inventories',()=>{
+ const expected=[["B28-ID-BALI-A",[130,143,405,113],791],["B28-ID-BALI-B",[117,158,374,124],773],["B28-ID-BALI-C",[127,156,354,132],769],["B28-ID-BALI-D",[137,144,400,120],801],["B28-ID-BALI-E",[139,186,382,119],826],["B28-ID-BALI-F",[103,141,406,102],752],["B28-ID-BALI-G",[130,169,379,118],796],["B28-ID-BALI-H",[124,178,385,121],808],["B28-ID-BALI-I",[122,167,386,117],792],["B28-ID-BALI-J",[138,145,400,102],785],["B28-ID-BALI-K",[143,156,399,111],809],["B29-PH-TARAKA",[198,189,226,231,248,329,122],1543],["B29-PH-PRACTICE",[149,324,129,182,170,213,166],1333],["B30-FI-BRONZE",[200,200,100,200],700],["B30-FI-STEEL",[100,200,200,200],700]];
+ for(const [id,intervals,span] of expected){const m=catalog.scales.find(s=>s.id===id);assert.deepEqual(m.intervals_cents,intervals);assert.equal(m.circle_ready,false);assert.equal(m.notes_count,intervals.length+1);assert.equal(m.reported_span_cents,span);assert.equal(m.reference_pitch_only,true);assert.doesNotMatch(wheel(m,2.5,'Sharps','Major',modes[0]),/NaN|undefined/);}
+ assert.equal(catalog.regions.find(g=>g.id==='b28-bali').model_ids.length,11);assert.equal(catalog.regions.find(g=>g.id==='b29-maranao').model_ids.length,2);assert.equal(catalog.regions.find(g=>g.id==='b30-finland').model_ids.length,2);
+});
