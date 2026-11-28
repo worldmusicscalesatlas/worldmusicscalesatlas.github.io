@@ -65,3 +65,8 @@ Nine scoped additions: a nominal 22-key Nicaraguan marimba de arco inventory (Gr
 - Conlon's chapter identifies the Iglulik drum-dance song “I'm So Happy” and lists five note names in a speculative reconstruction based on the song. The underlying score and cultural reuse review remain unresolved, so this inventory stays deferred. [Primary chapter](https://www.perlego.com/book/2382494/music-of-the-first-nations-tradition-and-innovation-in-native-north-america-pdf?partner_id=100014)
 
 All 305 previous models are preserved. All 45 geographical entries contain playable models.
+
+
+## Search and reference library
+
+The public reference pages, XML sitemap, robots.txt and llms.txt are generated from the existing public catalog and built-in modes. Run `npm run seo:generate` after changing those data, then `npm run seo:check` to verify freshness. The interactive atlas remains independent of the static pages. Submit `https://worldmusicscalesatlas.github.io/sitemap.xml` in Google Search Console and Bing Webmaster Tools after deployment. Search and training crawler controls are separate; crawler directives are voluntary, and all existing copyright and cultural rights remain in effect.
