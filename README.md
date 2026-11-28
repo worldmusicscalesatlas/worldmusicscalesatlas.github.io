@@ -1,98 +1,65 @@
 # World Music Scales Atlas
 
-**An independent interactive research and educational platform for musical scales, modal systems, microtonal tunings and cultural music traditions.**
+**An independent interactive research and educational platform for musical scales, modal systems, microtonal tunings and musical traditions worldwide.**
 
 Created and developed by [Dr. Pouya Hosseini](https://drpouyahosseini.github.io/).
 
-[Live atlas](https://worldmusicscalesatlas.github.io/) · [Reference library](https://worldmusicscalesatlas.github.io/reference.html) · [About](https://worldmusicscalesatlas.github.io/about.html) · [Licence](LICENSE)
+[Explore the Atlas](https://worldmusicscalesatlas.github.io/) · [Reference library](https://worldmusicscalesatlas.github.io/reference.html) · [User guide](https://worldmusicscalesatlas.github.io/guide.html) · [About](https://worldmusicscalesatlas.github.io/about.html)
 
 ## Overview
 
-Start with D Dorian, or choose Shur to explore the Persian scale on any tonic. On a phone, add the Atlas to the home screen for standalone display. Select a geographic region to explore 393 documented tuning models across 65 populated geographical entries. Choose a regional scale, then drag the inner diatonic ring to transpose in 50-cent steps. The outer circle preserves the ordered intervals. Compare Scales aligns octave models on concentric rings and measured open spans on a shared cent axis. Source interpretations remain under review.
+The Atlas brings together ethnomusicological documentation, computational pitch analysis and interactive geographic visualization. Explore source-linked pitch systems across cultures, examine their intervals and compare their tuning structures.
 
-The public catalog contains app-facing model metadata, tuning intervals, references and geographic navigation. The research workbooks and notes are private.
+The public catalog contains 393 documented tuning models across 65 geographical entries, supported by 99 references. Seven Western diatonic modes are also available.
 
-[Open the Atlas](https://worldmusicscalesatlas.github.io/) · [Read the guide](https://worldmusicscalesatlas.github.io/guide.html) · [Report a problem](https://github.com/worldmusicscalesatlas/worldmusicscalesatlas.github.io/issues)
+## Features
+
+- Interactive globe for exploring musical traditions by geographical location.
+- Scale and tuning visualizations with intervals expressed in cents.
+- Transposition in 50-cent steps and synthesized pitch playback.
+- Concentric comparison of octave-based models and shared-axis comparison of open pitch spans.
+- Source-linked reference pages with model-specific evidence and interpretation notes.
+- Responsive desktop and mobile interface, with home-screen installation and offline support for core application assets.
+
+## Research methodology
+
+The Atlas distinguishes theoretical modal structures, nominal instrument tunings, measured pitch inventories and secondary-source representations. Measured spans are preserved without imposing artificial octave closure. The first pitch is treated as a playback reference where a musical tonic is not established by the evidence.
+
+Numerical similarities do not establish cultural equivalence. The models are analytical representations, not definitive accounts of performance practice or complete musical systems. Source citations and verification limitations accompany each model in the reference library and application. Research workbooks and private notes are not included in this repository.
+
+Geographical anchors indicate approximate cultural provenance and navigation locations, not territorial claims. The Atlas acknowledges the [CARE Principles](https://doi.org/10.5334/dsj-2020-043) and [Local Contexts Traditional Knowledge Labels](https://localcontexts.org/labels/traditional-knowledge-labels/). It does not claim community authorization or assign community-defined labels on behalf of others.
 
 ## Run locally
 
-Run `python3 -m http.server 8000` from the project directory and visit http://localhost:8000. The application runs in the browser. Run `node --test atlas.test.mjs` with Node 22 or later to check the examples and diagrams.
+From the repository directory, start a local server:
 
-## Authorship, licensing and attribution
+```sh
+python3 -m http.server 8000
+```
 
-Created by Dr. Pouya Hosseini. Original protected Atlas materials are proprietary under the [licence and third-party rights notice](LICENSE); this is not a general open-source licence. GitHub platform rights, applicable statutory exceptions and third-party licences remain unaffected. DaMuSc-derived CC BY 4.0 contributions remain reusable under that licence, including commercially with attribution. The basemap uses [Natural Earth](https://www.naturalearthdata.com/about/terms-of-use/) public-domain relief and country outlines. Citations accompany the research models. Seven named Western diatonic modes are available alongside the regional collection. See the [Copyright & Terms of Use](https://worldmusicscalesatlas.github.io/terms.html) for the rights reservation covering original materials. Third-party references retain their respective rights.
+Open [http://localhost:8000](http://localhost:8000) in a browser.
 
-## Research expansion (Batch 02)
+With Node.js 22 or later, run the automated checks:
 
-Ten historical Javanese models from Ellis (1885, pp. 510 and 512) distinguish instrument measurements, an adopted mean, a pitch inventory and five-note modal selections. Three measured spans are preserved without octave normalization. Navigation indicates cultural provenance; playback starts from a chosen reference pitch rather than an asserted historical tonic. The remaining research candidates are not published.
+```sh
+npm test
+npm run seo:check
+```
 
-## Research expansion (Batch 03 — Japan and Ryukyu)
+After changes to the public catalog or built-in modes, regenerate the reference pages and search index using `npm run seo:generate`.
 
-Four theoretical octave representations derived from the Koizumi tetrachord framework and two historical koto tuning observations from Ellis (1885, pp. 522–523). Theoretical models use semitone-based numerical encoding, not measured intonation; historical models preserve strings II–VII of the source table. Separate Japanese and Ryukyuan navigation entries reflect cultural provenance. Mathematical pitch-pattern overlap with other traditions does not establish modal equivalence.
+## Authorship and licensing
 
-## Research expansion (Batch 04 — Azerbaijan and Thailand)
+Copyright © 2026 Dr. Pouya Hosseini. All rights reserved in original Atlas materials.
 
-Four full-range theoretical Azerbaijani models derived from Hajibeyov’s tetrachord construction and four Thai tuning references (one ideal comparator and three documented pitch sequences from Wisuttipat 2015, CC BY 4.0). The theoretical encodings are not acoustic measurements, and the long measured spans are preserved without normalization. First pitches serve as playback references; functional modal centers and actual intonation are not inferred from them. Other candidates remain under review.
+The original software, visual identity and protected content are proprietary under the [licence and third-party rights notice](LICENSE). Public access does not constitute a general open-source licence. Applicable statutory exceptions, GitHub platform rights and third-party licences remain unaffected.
 
-## Research expansion (Batches 05–08)
+The geographical basemap uses [Natural Earth](https://www.naturalearthdata.com/about/terms-of-use/) public-domain data.
 
-29 source-specific representations: five Korean pansori pitch collections; 12 Ethiopian Amhara recording-derived bati profiles; Hungarian and Andalusian theoretical examples; nine Colombian marimba interval inventories; and an ’Are’are equiheptatonic ideal. No octave closure is invented. Ethiopian rows with any sum discrepancy and candidates with unresolved attribution or insufficient evidence remain excluded. Numerical sequences cite the original investigators and are cross-checked against McBride, Passmore & Tlusty’s DaMuSc compilation. The associated PLOS ONE article is CC BY 4.0; the database-specific license has not been independently confirmed. Original figures, audio and prose are not reproduced. Mathematical overlap is not cultural equivalence. Primary numerical text was checked, but page images were unavailable for some sources.
+DaMuSc database compilation © 2022–2026 John M. McBride and contributors, licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). See the [database licensing scope](https://github.com/jomimc/DaMuSc/blob/main/LICENSE.md) and [McBride, Passmore & Tlusty (2023)](https://doi.org/10.1371/journal.pone.0284851). Selected raw interval records are adapted with Atlas labels, geographic anchors, evidence annotations and display geometry. No additional restrictions apply to the CC BY licensed contributions; underlying third-party publications and cultural materials retain their own rights.
 
-## Research expansion (Batches 09–10) and evidence audit
+See the complete [Copyright & Terms of Use](https://worldmusicscalesatlas.github.io/terms.html).
 
-Eleven new source-specific pitch representations: three Burmese lower-register instrument profiles, five observations of one southeastern Angolan likembe, two synoptic melodic pitch profiles from the Erkomaishvili Georgian chant corpus, and one historical Highland bagpipe octave segment. The Burmese upper register with inconsistent labels is not included; original separate near-unison Angolan lamellae are retained; Georgian corpus estimates are not fixed national scales. No undocumented octave closure is imposed.
+## Feedback and collaboration
 
-All 269 pre-existing records passed structural and numerical integrity checks. In this audit 94 formula/ideal representations and four historical sléndro observations were rechecked against their named evidence. For 91 secondary computational models, source context was examined but primary-source verification remains pending; 80 further records received structural checks only in this round. Earlier source reviews are not repeated claims of independent validation. No pre-existing numerical sequences were changed. Evidence-review labels in the Info panel distinguish these scopes. The audit identified 111 existing records with at least one matching ordered interval sequence (0.01-cent tolerance), eight contextual references not linked to specific models, and three navigation anchors without models. Cross-tradition interval matches are not cultural equivalence. Pending entries are not newly certified. Remaining expansion candidates await source access and cultural/numerical review.
-
-## Research expansion (Batches 11–14) — Americas and Indigenous heritage
-
-Three measured Brazilian pífano profiles from Mendes (2012), frequency Tables 1, 3 and 5. The intervals are recalculated from the original integer-Hz measurements, rounded at cumulative positions, and checked against DaMuSc M0338–M0340 (each step agrees within 1 cent); no database sequence is copied or normalized. The source studies Cariri banda cabaçal practice; these are not attributed to an Indigenous nation or claimed to represent all Brazilian music. All 280 earlier records are unchanged.
-
-Only traditions with playable numerical models appear in public navigation. Deferred research records are preserved separately from the public application. The numerical and cultural reuse review standards remain unchanged. No private research notes, song transcriptions, recordings or restricted cultural data are included.
-
-The Atlas acknowledges the [CARE Principles](https://doi.org/10.5334/dsj-2020-043), [Local Contexts community-defined TK Labels](https://localcontexts.org/labels/traditional-knowledge-labels/), and relevant community-specific governance; it does not self-assign labels or claim compliance or approval without collaboration. Anchors are approximate navigation aids, not territorial claims.
-
-## Research expansion (Batches 15–18)
-
-Six source-specific additions: three Esmeraldas marimba profiles (Pontón Yépez 2022, Partitura 61; row counts and first intervals checked against p. 165), two contemporary equal-tempered Mandé kora teaching examples (not measured historical tunings), and one sixteen-reed Isan khene inventory (Musib et al. 2025). Conflicting khene fundamentals were resolved against the stated harmonic series and FFT peaks; the two near-unison G4 reeds are retained. The fourth Esmeraldas profile is withheld because the extracted row has an inconsistent count. Primary text was accessible, but rendered PDF pages could not be retrieved; no visual verification claimed. No new Inuit or other Indigenous song-derived models, ambiguous museum provenance, or empty markers are published. All 283 previous model records are unchanged. Only instrument facts and independently calculated theoretical pitch geometry are used; no source figures, recordings or songs reproduced, no community endorsement asserted. Further cultural and source review remains open.
-
-## Research expansion (Batches 19–22)
-
-Seven documented pitch representations in five populated geographic entries: a nominal modern professional Bolivian quena compass; a Gambian Mandinka balo equiheptatonic mathematical comparator (not measured bars); a particular Malagasy 15-string tourist-market valiha; two Huế đàn tranh pitch-name examples from the Vietnamese Institute of Musicology; and two Khmer structural pitch patterns from Sam-Ang Sam (2002, p. 9). The latter explicitly disputes universal equidistance in actual Khmer music. The Vietnamese English and Vietnamese indexed texts agree but direct page fetch failed; the Cambodian PDF text was available but screenshots failed. All additions are theoretical or nominal instrument representations, not new measured microtonal profiles. Public educational collection information and source-reported pitch facts only; no source prose, photos, recordings, songs or ceremonial material reproduced. Community endorsement or wider cultural authorization is not asserted. Kallawaya, Hawaiian, Inuit and other Indigenous community-specific material, the full Hmong khaen frequency sequence, and Andean archaeological and Central African museum candidates remain deferred due to provenance, cultural reuse or numerical evidence limitations. All 289 prior model records unchanged; no empty markers.
-
-## Research expansion (Batches 23–26)
-
-Nine scoped additions: a nominal 22-key Nicaraguan marimba de arco inventory (Grinnell College item 3446); twelve measured outer-register fundamentals of a soprano steelpan (Maloney 2010, Table 4.1; 1–3 Hz accelerometer mass-loading caveat); Gerald Eze’s publicly described one-octave Igbo ubọ-aka teaching tuning (Carter-Ényì 2024, §5.1); and six absolute, non-normalized I–V cluster-mean interval profiles from Lithuanian monophonic singing (Budrys & Višnevska 2014, Table 4). The latter are aggregate pitch profiles, not individual songs or complete octave scales. Source text and methodology inspected; PDF page images were unavailable. The Igbo extended-range example was withheld due to ambiguous octave marks. The two more limited Lithuanian I/II/IV/V subsets were not added. No Arctic, Oceanian or other restricted community materials published; Indigenous candidate permissions remain unresolved. No instrument photographs, recordings, song transcriptions or source figures reproduced; community endorsement is not asserted. All 296 existing model records are unchanged. No empty markers.
-
-## Follow-up verification (Batches 23–26)
-
-- López's Jujuy fieldwork supports a 13-pitch nominal Malta inventory starting on D within the G-major collection.
-- Würzburg's museum data supports three measured bala excerpts. These retain their measured spans and are scoped to individual specimens of unspecified national provenance.
-- Utsugi and Moriyama report the basic shakuhachi note names. Ando documents the octave repetitions and sounding-pitch variability. The model uses the nominal octave reference.
-- Zemp's original Malaita fieldwork confirms the approximate equiheptatonic practice behind the existing ’au tahana model. The theoretical seven-equal-step reference already covers this candidate.
-- Conlon's chapter identifies the Iglulik drum-dance song “I'm So Happy” and lists five note names in a speculative reconstruction based on the song. The underlying score and cultural reuse review remain unresolved, so this inventory stays deferred. [Primary chapter](https://www.perlego.com/book/2382494/music-of-the-first-nations-tradition-and-innovation-in-native-north-america-pdf?partner_id=100014)
-
-All 305 previous models are preserved. All 45 geographical entries contain playable models.
-
-
-## Search and reference library
-
-The public reference pages, XML sitemap, robots.txt and llms.txt are generated from the existing public catalog and built-in modes. Run `npm run seo:generate` after changing those data, then `npm run seo:check` to verify freshness. The interactive atlas remains independent of the static pages. Submit `https://worldmusicscalesatlas.github.io/sitemap.xml` in Google Search Console and Bing Webmaster Tools after deployment. Search and training crawler controls are separate; crawler directives are voluntary, and all existing copyright and cultural rights remain in effect.
-
-## Research expansion (Batch 27 — Mongolia)
-
-Five source-linked theoretical pentatonic octave species from Luvsangenden (2023, pp. 21–22), discussing Jantsannorov (1983), with contextual confirmation from the UNESCO traditional Mongolian music album booklet. The numbering is editorial and the 12-TET geometry is not measured intonation. Long-song modal shifts and microtonal ornamentation are not reproduced. The original 1983 article and PDF page images were unavailable; the extracted dissertation and booklet text were inspected. No traditional mode names, recordings, song transcriptions or community endorsement are asserted. All 310 prior records are preserved.
-
-## Research expansion (Batches 28–30)
-
-Eleven five-degree pengisep pitch profiles from Shiokawa et al. (2016, Table 2), two Maranao kolintang instrument inventories from Cadar and Garfias (1996, p. 122), and two modern five-string Finnish kantele replica tunings reported by Kastinen (2018). Original PDF table images inspected for the first two sources. The Balinese averages are not individual measured octaves; the Maranao frequency profiles retain their measured spans; the kantele models encode nominal note names rather than acoustic measurements. No octave closure imposed, no source figures or recordings reproduced, and no claim of cultural endorsement. All 315 previous records preserved. Other coverage candidates remain under research and cultural reuse review.
-
-## Research expansion (Batches 31–38)
-
-46 additional source-specific models: 9 Asena bangwe observations and 17 valimba measured segments independently calculated from Van Zanten's frequency tables (1970–71 observations), three archaeological Jiahu flute inventories (Zhang et al., Tables 2, 3 and 6), one Gisu ludaya pitch inventory (Cooke, p. 81), one nominal Norwegian Hardanger fiddle open-string reference, and 15 selected secondary DaMuSc rows covering Swedish spilåpipa, Chinese flute/bell, Sambla xylophone and Tanzanian ilimba. The first 31 entries use primary numerical or nominal evidence; the 15 secondary records explicitly require primary numerical verification. Withheld the two inconsistent Jiahu tables, ambiguous Malawi lamellophone rows and a flagged broken/out-of-tune Sambla inventory. All 330 previous records preserved. No fabricated octave closure or source media, no claim of representing an entire culture or community endorsement.
-
-DaMuSc database compilation © 2022–2026 John M. McBride and contributors, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); [licensing scope](https://github.com/jomimc/DaMuSc/blob/main/LICENSE.md). Citation: [McBride, Passmore & Tlusty (2023)](https://doi.org/10.1371/journal.pone.0284851). Adaptation: selected raw measured rows with new Atlas names, geographic anchors, evidence annotations and display geometry. The database license applies to the CC BY contribution, not proprietary Atlas material or underlying third-party publications/media. No additional legal or technological restrictions are imposed on the licensed contribution.
-
-## Research expansion (Batches 39–45 — priority regions)
-
-17 additional source-linked theoretical and nominal representations: seven Bulgarian non-microtonal makam forms (Kirilov 2021, Example 2, rendered p. 61 inspected), two Kyrgyz folk-song pitch structures and two southwestern Kazakh analytical collections (Sipos 2014/2001), one illustrative Armenian conjunct-tetrachord chain with a 1500-cent non-octave span, a nominal Romanian 20-pipe nai compass, the contemporary llanero cuatro and common mestizo charango open-string references, and two contemporary Hawaiʻi-associated public ukulele tunings. These are not new acoustic measurements. The Romanian dissertation text was readable but the rendered page was unavailable; the Grinnell museum charango pitch description was indexed but direct page fetch was blocked. The abstract data and nominal teaching inventories do not include song transcriptions or restricted ceremonial material. Australian Aboriginal, Māori, Kallawaya and other community-specific Indigenous traditions remain deferred pending sufficient numerical evidence, provenance and cultural reuse review. No empty markers. All 376 previous records preserved. No new claim of cultural endorsement.
+Scientific corrections, methodological feedback and cultural concerns are welcome through the [issue tracker](https://github.com/worldmusicscalesatlas/worldmusicscalesatlas.github.io/issues). For research collaboration and licensing enquiries, visit the [creator's official website](https://drpouyahosseini.github.io/).
