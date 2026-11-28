@@ -1,6 +1,6 @@
 # World Music Scales Atlas
 
-Start with D Dorian, or choose Shur to explore the Persian scale on any tonic. On a phone, add the Atlas to the home screen for standalone display. Select a geographic region to explore 232 documented tuning models across 20 navigation entries. Choose a regional scale, then drag the inner diatonic ring to transpose in 50-cent steps. The outer circle preserves the ordered intervals. Compare Scales aligns octave models on concentric rings and measured open spans on a shared cent axis. Source interpretations remain under review.
+Start with D Dorian, or choose Shur to explore the Persian scale on any tonic. On a phone, add the Atlas to the home screen for standalone display. Select a geographic region to explore 240 documented tuning models across 22 navigation entries. Choose a regional scale, then drag the inner diatonic ring to transpose in 50-cent steps. The outer circle preserves the ordered intervals. Compare Scales aligns octave models on concentric rings and measured open spans on a shared cent axis. Source interpretations remain under review.
 
 The public catalog contains app-facing model metadata, tuning intervals, references and geographic navigation. The research workbooks and notes are private.
 
@@ -21,3 +21,7 @@ Ten historical Javanese models from Ellis (1885, pp. 510 and 512) distinguish in
 ## Research expansion (Batch 03 — Japan and Ryukyu)
 
 Four theoretical octave representations derived from the Koizumi tetrachord framework and two historical koto tuning observations from Ellis (1885, pp. 522–523). Theoretical models use semitone-based numerical encoding, not measured intonation; historical models preserve strings II–VII of the source table. Separate Japanese and Ryukyuan navigation entries reflect cultural provenance. Mathematical pitch-pattern overlap with other traditions does not establish modal equivalence.
+
+## Research expansion (Batch 04 — Azerbaijan and Thailand)
+
+Four full-range theoretical Azerbaijani models derived from Hajibeyov’s tetrachord construction and four Thai tuning references (one ideal comparator and three documented pitch sequences from Wisuttipat 2015, CC BY 4.0). The theoretical encodings are not acoustic measurements, and the long measured spans are preserved without normalization. First pitches serve as playback references; functional modal centers and actual intonation are not inferred from them. Other candidates remain under review.
