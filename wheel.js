@@ -1,9 +1,9 @@
-import {comparisonGraphic} from './compare.js'
+import {comparisonGraphic} from './compare.js?v=batch02'
 import {diagram,esc} from './diagrams.js?v=world4'
 import {analyze,fmt,names,signed} from './theory.js?v=regional1'
 
 export function rotateModel(model,degree){
- if(!model.circle_ready||!degree)return model
+ if(!model.circle_ready||model.reference_pitch_only||!degree)return model
  const s=model.intervals_cents
  return {...model,intervals_cents:[...s.slice(degree),...s.slice(0,degree)]}
 }
@@ -17,7 +17,7 @@ export function wheel(model,t,pref,ref,other){
   const p=(n-t)*100,[x,y]=xy(p,59),[a,b]=xy(p,71),[c,d]=xy(p,80)
   return '<line x1="'+a+'" y1="'+b+'" x2="'+c+'" y2="'+d+'" stroke="currentColor"/><text x="'+x+'" y="'+y+'" text-anchor="middle" dominant-baseline="central" font-size="14">'+ 'CDEFGAB'[i]+'</text>'
  }).join('')
- const dial='<g class="dial"><circle cx="180" cy="180" r="80" class="dialface"/><g class="dial-notes">'+ring+'</g><path class="dial-arrows" d="M150 176l-4 4 4 4 M210 176l4 4-4 4" fill="none" stroke="currentColor"/><text x="180" y="180" text-anchor="middle" font-size="17">'+esc(tonicName(t,pref))+'</text><text x="180" y="196" text-anchor="middle" font-size="10">TONIC</text></g>'
+ const dial='<g class="dial"><circle cx="180" cy="180" r="80" class="dialface"/><g class="dial-notes">'+ring+'</g><path class="dial-arrows" d="M150 176l-4 4 4 4 M210 176l4 4-4 4" fill="none" stroke="currentColor"/><text x="180" y="180" text-anchor="middle" font-size="17">'+esc(tonicName(t,pref))+'</text><text x="180" y="196" text-anchor="middle" font-size="10">' +(model.reference_pitch_only?'REFERENCE':'TONIC')+'</text></g>'
  return comparisonGraphic(model,other,t,pref,dial)
 }
 const symbol=v=>Math.abs(v)<1e-6?'♮':Math.abs(v-100)<1e-6?'♯':Math.abs(v+100)<1e-6?'♭':signed(v)+'¢'
