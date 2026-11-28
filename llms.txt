@@ -1,6 +1,6 @@
 # World Music Scales Atlas
 
-> An independent interactive educational atlas by Dr. Pouya Hosseini, with source-linked musical pitch and tuning models from around the world. Numerical representations are not full descriptions of musical traditions or definitive performance intonation.
+> An independent interactive educational atlas by Pouya Hosseini, with source-linked musical pitch and tuning models from around the world. Numerical representations are not full descriptions of musical traditions or definitive performance intonation.
 
 ## Reference resources
 
