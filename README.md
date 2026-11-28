@@ -2,7 +2,7 @@
 
 **An independent interactive research and educational platform for musical scales, modal systems, microtonal tunings and musical traditions worldwide.**
 
-Created and developed by [Dr. Pouya Hosseini](https://drpouyahosseini.github.io/).
+Created and developed by [Pouya Hosseini](https://drpouyahosseini.github.io/).
 
 [Explore the Atlas](https://worldmusicscalesatlas.github.io/) · [Reference library](https://worldmusicscalesatlas.github.io/reference.html) · [User guide](https://worldmusicscalesatlas.github.io/guide.html) · [About](https://worldmusicscalesatlas.github.io/about.html)
 
@@ -50,7 +50,7 @@ After changes to the public catalog or built-in modes, regenerate the reference 
 
 ## Authorship and licensing
 
-Copyright © 2026 Dr. Pouya Hosseini. All rights reserved in original Atlas materials.
+Copyright © 2026 Pouya Hosseini. All rights reserved in original Atlas materials.
 
 The original software, visual identity and protected content are proprietary under the [licence and third-party rights notice](LICENSE). Public access does not constitute a general open-source licence. Applicable statutory exceptions, GitHub platform rights and third-party licences remain unaffected.
 
@@ -66,7 +66,7 @@ Scientific corrections, methodological feedback and cultural concerns are welcom
 
 ## Related projects
 
-- [Dr. Pouya Hosseini — official website](https://drpouyahosseini.github.io/)
+- [Pouya Hosseini — official website](https://drpouyahosseini.github.io/)
 - [Persian Music Scales — educational hub](https://persianmusicscales.github.io/)
 - [Persian Music Scales App](https://persianmusicscales.github.io/Persian-Music-Scales-App/)
 - [Urmawī Advar Atlas](https://persianmusicscales.github.io/urmawi-advar-atlas/)
