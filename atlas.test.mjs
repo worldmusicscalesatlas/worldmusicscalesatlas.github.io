@@ -19,7 +19,7 @@ import {readFileSync} from 'node:fs'
 import {wheel,rotateModel,rotateTonic,notation} from './wheel.js'
 const catalog=JSON.parse(readFileSync(new URL('./catalog.json',import.meta.url)))
 test('Every geographic model is selectable and transposable through 24 ring positions',()=>{
- assert.equal(catalog.scales.length,283)
+ assert.equal(catalog.scales.length,289)
  for(const m of catalog.scales){
   assert.ok(catalog.regions.find(g=>g.id===m.geo_id).model_ids.includes(m.id))
   for(let t=0;t<12;t+=.5){
@@ -69,7 +69,7 @@ test('Batch 02 Javanese observations preserve the verified source values and dis
  const expected=[["EXP-IDN-ELLIS-1885-SLENDRO-MEAN",[228,256,244,232,240],true,5],["EXP-IDN-ELLIS-1885-SLENDRO-LOWER-GENDER",[191,251,249,261,220],false,6],["EXP-IDN-ELLIS-1885-SLENDRO-UPPER-GENDER",[219,256,261,223,288],false,6],["EXP-IDN-ELLIS-1885-SLENDRO-LAND-SARON",[270,200,266,239,243],false,6],["EXP-IDN-ELLIS-1885-PELOG-INVENTORY",[137,309,129,112,133,278,102],true,7],["EXP-IDN-ELLIS-1885-PELOG-DANGSOE",[137,550,133,278,102],true,5],["EXP-IDN-ELLIS-1885-PELOG-BEM-ELLIS",[137,438,112,411,102],true,5],["EXP-IDN-ELLIS-1885-PELOG-BEM-LAND",[147,416,96,429,112],true,5],["EXP-IDN-ELLIS-1885-PELOG-BARANG-ELLIS",[137,438,112,133,380],true,5],["EXP-IDN-ELLIS-1885-PELOG-BARANG-LAND",[151,426,111,179,333],true,5]]
  const region=catalog.regions.find(g=>g.id==='exp-idn')
  assert.ok(region);assert.deepEqual(region.country_iso3_for_navigation,['IDN'])
- assert.equal(catalog.regions.length,30);assert.equal(catalog.sources.length,52)
+ assert.equal(catalog.regions.length,33);assert.equal(catalog.sources.length,57)
  assert.deepEqual(region.model_ids,expected.map(row=>row[0]))
  for(const [id,steps,circular,n] of expected){
   const model=catalog.scales.find(m=>m.id===id)
@@ -157,14 +157,20 @@ test('Batches 11–14 preserve primary frequency observations',()=>{
  }
 })
 
-test('Public navigation contains only 30 playable geographic entries and linked references',()=>{
- assert.equal(catalog.scales.length,283);assert.equal(catalog.regions.length,30)
+test('Public navigation contains only 33 playable geographic entries and linked references',()=>{
+ assert.equal(catalog.scales.length,289);assert.equal(catalog.regions.length,33)
  assert.deepEqual(playableRegions(catalog.regions,catalog.scales),catalog.regions)
  const ids=new Set(catalog.scales.map(s=>s.id))
  for(const g of catalog.regions){assert.ok(g.model_ids.length);assert.ok(g.model_ids.every(id=>ids.has(id)&&catalog.scales.find(s=>s.id===id).geo_id===g.id));assert.equal(coverageLabel(g),g.model_ids.length+' models')}
- const assigned=catalog.regions.flatMap(g=>g.model_ids);assert.equal(assigned.length,283);assert.equal(new Set(assigned).size,283)
+ const assigned=catalog.regions.flatMap(g=>g.model_ids);assert.equal(assigned.length,289);assert.equal(new Set(assigned).size,289)
  for(const s of catalog.scales)assert.ok(assigned.includes(s.id))
- const referenced=new Set(catalog.scales.flatMap(m=>m.source_ids));assert.equal(referenced.size,52);assert.ok(catalog.sources.every(s=>referenced.has(s.id)))
+ const referenced=new Set(catalog.scales.flatMap(m=>m.source_ids));assert.equal(referenced.size,57);assert.ok(catalog.sources.every(s=>referenced.has(s.id)))
  const fake=[{id:'empty',model_ids:[]},{id:'missing',model_ids:['missing-id']},{id:'context',coverage_status:'context_only',model_ids:['example']},{id:'wrong',model_ids:['example']},{id:'ok',model_ids:['example']}]
  assert.deepEqual(playableRegions(fake,[{id:'example',geo_id:'ok'}]).map(g=>g.id),['ok'])
+})
+
+test('Batches 15–18 preserve source-specific measured and teaching models',()=>{
+ const expected=[["B15-EC-CAICEDO-1","b15-esmeraldas",[121.2,208.7,166,210.1,127.1,184.1,183.5,129,185,184,131,187,197,122,160,212],false,17],["B15-EC-CAICEDO-2","b15-esmeraldas",[146.3,187,169,178.9,150.6,178.9,171.5,139,189.9,157.4,192.5,136,207,144.2,124.7,171.5],false,17],["B15-EC-J-AYOVI","b15-esmeraldas",[162.9,216.3,193.8,135.4,165.3,220,194.8,184,170.5,170.5,214.1,113.3,195.2,186,232.4,88.2,195.2,206,86.6,253.3,194,202,79.6],false,24],["B17-WA-SILABA","b17-mande-kora",[200,200,100,200,200,200,100],true,7],["B17-WA-SAUTA","b17-mande-kora",[200,200,200,100,200,200,100],true,7],["B18-TH-KHENE-2025","b18-isan-khene",[193,55,240,211,57,200,49,199,206,68,225,222,28,233,220],false,16]]
+ for(const [id,geo,steps,circular,n] of expected){const m=catalog.scales.find(s=>s.id===id);assert.ok(m);assert.equal(m.geo_id,geo);assert.deepEqual(m.intervals_cents,steps);assert.equal(m.circle_ready,circular);assert.equal(m.notes_count,n);assert.equal(m.reference_pitch_only,true);assert.ok(m.cultural_reuse_status);assert.deepEqual(rotateModel(m,1).intervals_cents,steps);assert.match(wheel(m,0,'Sharps','Major'),/REFERENCE/);assert.doesNotMatch(wheel(m,2.5,'Sharps','Major',modes[0]),/undefined|NaN/);if(m.source_reported_bar_count){assert.equal(m.notes_count,m.source_reported_bar_count);assert.equal(steps[0],m.source_reported_first_interval_cents)}}
+ const khene=catalog.scales.find(m=>m.id==='B18-TH-KHENE-2025');const hz=[...khene.source_right_tubes_hz,...khene.source_left_tubes_hz].sort((a,b)=>a-b);assert.equal(hz.length,16);assert.deepEqual(hz,khene.source_frequencies_hz);const p=hz.map(v=>Math.round(1200*Math.log2(v/hz[0])));assert.deepEqual(khene.intervals_cents,p.slice(1).map((v,i)=>v-p[i]));assert.equal(khene.reported_span_cents,p.at(-1));assert.ok(hz.includes(384)&&hz.includes(395));assert.ok(hz.includes(887)&&hz.includes(331));assert.equal(catalog.scales.filter(m=>/^B1[5-8]-/.test(m.id)).length,6)
 })
