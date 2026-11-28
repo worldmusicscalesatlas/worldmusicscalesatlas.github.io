@@ -50,6 +50,7 @@
 - [Mandé kora — modern teaching tunings](https://worldmusicscalesatlas.github.io/traditions/b17-mande-kora.html): 2 models.
 - [Mandinka balo — Gambia](https://worldmusicscalesatlas.github.io/traditions/b20-gambia-balo.html): 1 models.
 - [Mangwilo xylophone](https://worldmusicscalesatlas.github.io/traditions/mozambique.html): 1 models.
+- [Mongolia](https://worldmusicscalesatlas.github.io/traditions/b27-mongolia.html): 5 models.
 - [Nicaragua — marimba de arco](https://worldmusicscalesatlas.github.io/traditions/b23-nicaragua-marimba.html): 1 models.
 - [Ryukyuan music](https://worldmusicscalesatlas.github.io/traditions/b03-ryukyu.html): 1 models.
 - [Scottish Highland bagpipe](https://worldmusicscalesatlas.github.io/traditions/b10-scotland.html): 1 models.
