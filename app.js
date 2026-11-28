@@ -4,7 +4,8 @@ import {esc} from './diagrams.js'
 import {nearestDegree} from './compare.js'
 import {positions,fmt,signed} from './theory.js'
 import {wheel,notation,rotateTonic,rotateModel,tonicName} from './wheel.js?v=batch02'
-import {mountGlobe} from './globe.js?v=touch5'
+import {mountGlobe} from './globe.js?v=batch11-14'
+import {coverageInfo} from './coverage.js?v=batch11-14'
 const by=id=>document.getElementById(id)
 const query=new URLSearchParams(location.search)
 const response=await fetch(new URL('./catalog.json',import.meta.url))
@@ -51,7 +52,9 @@ function chooseRegion(id,push=false,animate=true){
  by('detail').hidden=true;by('atlas').hidden=false;by('region-list').open=false;by('region').value=id
  const models=all.filter(m=>m.geo_id===id)
  select('model',[['','Choose a scale'],...models.map(m=>[m.id,label(m)])],'')
- by('scale-label').hidden=!models.length;by('coverage').textContent=models.length?'':'Research coverage only. No numerical tuning is available yet.'
+ by('scale-label').hidden=!models.length
+ const context=coverageInfo(group,models,sources),panel=by('coverage');panel.replaceChildren(document.createTextNode(context.text))
+ for(const source of context.links){const link=document.createElement('a');link.href=source.url;link.textContent=source.label;link.target='_blank';link.rel='noopener noreferrer';panel.append(link)}
  by('region-title').textContent=group.label;by('picker').hidden=true
  if(id==='western')globe.reset();else globe.focus(id)
  const delay=animate&&!matchMedia('(prefers-reduced-motion: reduce)').matches?420:0
@@ -81,7 +84,7 @@ function render(){
  by('steps').textContent='Steps in cents · '+m.intervals_cents.map(fmt).join(' · ')
  by('score').querySelector('.content').innerHTML=notation(m,t,pref,ref)
  const refs=active.source_ids.map(id=>sources.find(s=>s.id===id)).filter(Boolean)
- by('explanation').querySelector('.content').innerHTML='<h2>About this tuning</h2><p>'+esc([active.name,active.tradition,active.tuning_model].filter(Boolean).join(' · '))+'</p>'+(active.context_note?'<p>'+esc(active.context_note)+'</p>':'')+(active.audit_status?'<p><strong>Evidence review:</strong> '+esc(active.audit_status)+(active.audit_note?' — '+esc(active.audit_note):'')+'</p>':'')+'<p>'+(m.circle_ready?'Read clockwise from the top. Each colored arc spans one step between successive scale notes. Its width shows the interval size in cents (100¢ = one equal-tempered semitone). The inner letters are diatonic reference notes. Drag them to transpose the reference pitch. Signature lists the sounding notes and their exact alterations.':'This open span ends at its documented final pitch.')+'</p>'+refs.map(s=>'<p><a href="'+esc(s.url)+'">'+esc(s.citation)+'</a></p>').join('')+(refs.length?'<small>Source interpretation under review.</small>':'')
+ by('explanation').querySelector('.content').innerHTML='<h2>About this tuning</h2><p>'+esc([active.name,active.tradition,active.tuning_model].filter(Boolean).join(' · '))+'</p>'+(active.context_note?'<p>'+esc(active.context_note)+'</p>':'')+(active.cultural_reuse_status?'<p><strong>Cultural reuse:</strong> '+esc(active.cultural_reuse_status)+'</p>':'')+(active.audit_status?'<p><strong>Evidence review:</strong> '+esc(active.audit_status)+(active.audit_note?' — '+esc(active.audit_note):'')+'</p>':'')+'<p>'+(m.circle_ready?'Read clockwise from the top. Each colored arc spans one step between successive scale notes. Its width shows the interval size in cents (100¢ = one equal-tempered semitone). The inner letters are diatonic reference notes. Drag them to transpose the reference pitch. Signature lists the sounding notes and their exact alterations.':'This open span ends at its documented final pitch.')+'</p>'+refs.map(s=>'<p><a href="'+esc(s.url)+'">'+esc(s.citation)+'</a></p>').join('')+(refs.length?'<small>Source interpretation under review.</small>':'')
  by('compare').classList.toggle('active',Boolean(other))
  by('compare').setAttribute('aria-label',other?'Compare · '+other.name:'Compare')
  by('remove-comparison').hidden=!other

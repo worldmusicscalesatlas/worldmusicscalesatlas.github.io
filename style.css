@@ -96,3 +96,7 @@ header,.mapbar,.mapbar summary,.mapbar small {color:var(--text)}
  .stage #compare {grid-row:3}
  .stage :is(#compare,#signature,#play) {min-height:44px;padding:.4rem .5rem;font-size:clamp(.77rem,3vw,.9rem);white-space:nowrap}
 }
+
+/* Research context links remain readable within the map picker on small screens. */
+#coverage {max-height:min(32svh,14rem);overflow:auto;overscroll-behavior:contain;line-height:1.45;overflow-wrap:anywhere}
+#coverage a {display:block;margin-top:.55rem;color:inherit;text-decoration:underline;text-underline-offset:.18em}
