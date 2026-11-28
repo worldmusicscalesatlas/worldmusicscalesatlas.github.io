@@ -1,7 +1,7 @@
 // Keep the public catalog and instrument available on a return visit offline.
 const base = new URL('./', self.location.href)
 const prefix = 'world-scales:' + base.pathname + ':'
-const cacheName = prefix + '11'
+const cacheName = prefix + '12'
 const assets = [
   'index.html', 'guide.html', 'about.html', 'terms.html', 'atlas.webmanifest',
   'style.css', 'theme.js', 'app.js', 'sound.js', 'modes.js', 'diagrams.js',
