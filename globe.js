@@ -1,3 +1,4 @@
+import {coverageLabel} from './coverage.js?v=batch11-14'
 /** A static Earth texture projected analytically onto a sphere; no tiles or GIS service. */
 const DEG = Math.PI / 180;
 const BASE = { lon: 44, lat: 23, scale: 1 };
@@ -148,7 +149,7 @@ export function mountGlobe(container, geography, onSelect) {
     close();
     const heading=document.createElement('strong'); heading.textContent=title;
     popup.append(heading);
-    for(const g of entries) popup.append(button(g.label+' · '+g.model_ids.length+' models',()=>choose(g.id)));
+    for(const g of entries) popup.append(button(g.label+' · '+coverageLabel(g),()=>choose(g.id)));
     popup.append(button('Close',()=>{close();overlay.focus();}));
     popup.style.display='grid'; popup.querySelector('button')?.focus({preventScroll:true});
   };
@@ -216,7 +217,7 @@ export function mountGlobe(container, geography, onSelect) {
       if(labeled.has(p.g.id)||(![selected,hover].includes(p.g.id)&&boxes.length>=(width<420?3:5))) continue;
       labeled.add(p.g.id);
       ctx.font='500 12px system-ui,sans-serif';
-      const text=p.g.label+' · '+p.g.model_ids.length, w=Math.ceil(ctx.measureText(text).width)+14,h=22;
+      const text=p.g.label+' · '+coverageLabel(p.g), w=Math.ceil(ctx.measureText(text).width)+14,h=22;
       const candidates=[[12,-13],[12,6],[-w-11,-13],[-w-11,6],[8,-35]];
       for(const [dx,dy] of candidates){
         const x=p.x+dx,y=p.y+dy;
