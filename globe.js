@@ -2,6 +2,7 @@ import {coverageLabel} from './coverage.js?v=playable-only'
 /** A static Earth texture projected analytically onto a sphere; no tiles or GIS service. */
 const DEG = Math.PI / 180;
 const BASE = { lon: 44, lat: 23, scale: 1 };
+const AUTO_DEGREES_PER_MS = 360 / 90000;
 const asset = name => new URL('./globe-' + name, import.meta.url).href;
 const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
 const wrap = value => ((value + 540) % 360 + 360) % 360 - 180;
@@ -144,6 +145,9 @@ export function mountGlobe(container, geography, onSelect) {
   const abort = new AbortController();
   const listen=(el,type,fn,extra={})=>el.addEventListener(type,fn,{...extra,signal:abort.signal});
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+  let autoRotate=!reduced.matches, lastAutoFrame=null;
+  function stopRotation(){autoRotate=false;lastAutoFrame=null;}
+  listen(reduced,'change',e=>{if(e.matches)stopRotation();});
   const close = () => { popup.style.display='none'; popup.replaceChildren(); };
   const choose = id => { close(); onSelect(id); };
   const showChoices = (title,entries=[]) => {
@@ -166,7 +170,7 @@ export function mountGlobe(container, geography, onSelect) {
   listen(window,'atlas-theme',refreshTheme);
   refreshTheme();
   const fallback=()=>{
-    flat=true; renderer?.dispose();renderer=null; canvas.style.display='none';
+    stopRotation();flat=true; renderer?.dispose();renderer=null; canvas.style.display='none';
     Object.assign(view,{lon:0,lat:0,scale:1});
     overlay.setAttribute('aria-label','Flat world map. Select markers or choose a region from the list.');
     overlay.style.touchAction='none';
@@ -235,7 +239,12 @@ export function mountGlobe(container, geography, onSelect) {
   }
 
   function draw(now) {
-    frame=0; if(dead||document.hidden||!width||!height)return;
+    frame=0; if(dead||document.hidden||!width||!height){lastAutoFrame=null;return;}
+    const spinning=autoRotate&&!reduced.matches&&!flat&&!!renderer&&!!mapImage&&!flight;
+    if(spinning){
+      if(lastAutoFrame!==null)view.lon=wrap(view.lon+AUTO_DEGREES_PER_MS*clamp(now-lastAutoFrame,0,50));
+      lastAutoFrame=now;
+    }else lastAutoFrame=null;
     if(flight){
       const t=clamp((now-flight.start)/420,0,1),smooth=t*t*(3-2*t);
       view.scale=flight.scale+smooth*(2.15-flight.scale);view.lon=wrap(flight.lon+smooth*flight.dlon);view.lat=flight.lat+smooth*flight.dlat;
@@ -254,6 +263,7 @@ export function mountGlobe(container, geography, onSelect) {
       }
     }
     renderPins();
+    if(spinning)enqueue();
   }
   const resize=()=>{
     width=layer.clientWidth;height=layer.clientHeight;dpr=Math.min(window.devicePixelRatio||1,2);
@@ -263,11 +273,15 @@ export function mountGlobe(container, geography, onSelect) {
   const observer=new ResizeObserver(resize);observer.observe(layer);resize();
 
   function zoom(factor){
-    view.scale=clamp(view.scale*factor,flat?1:.7,3);flight=null;close();enqueue();
+    stopRotation();view.scale=clamp(view.scale*factor,flat?1:.7,3);flight=null;close();enqueue();
   }
-  function reset(){flight=null;Object.assign(view,flat?{lon:0,lat:0,scale:1}:BASE);close();enqueue();}
+  function reset(restart=false){
+    stopRotation();flight=null;selected=null;hover=null;
+    Object.assign(view,flat?{lon:0,lat:0,scale:1}:BASE);close();
+    autoRotate=restart&&!flat&&!reduced.matches;enqueue();
+  }
   function focus(id){
-    const g=geography.find(e=>e.id===id); selected=g?.id??null;close();
+    stopRotation();const g=geography.find(e=>e.id===id); selected=g?.id??null;close();
     if(g){
       flight=null;
       if(reduced.matches||document.hidden){view.lon=g.longitude;view.lat=g.latitude;view.scale=2.15;}
@@ -313,7 +327,7 @@ export function mountGlobe(container, geography, onSelect) {
   const distance=()=>{const [a,b]=[...pointers.values()];return Math.hypot(a.x-b.x,a.y-b.y);};
   listen(overlay,'pointerdown',e=>{
     if(e.button!==0)return;
-    flight=null;close();const point=local(e);
+    stopRotation();flight=null;close();const point=local(e);
     pointers.set(e.pointerId,point);overlay.setPointerCapture(e.pointerId);
     if(pointers.size===1){origin=point;drag=false;}
     if(pointers.size===2){pinch={distance:distance(),scale:view.scale};drag=true;}
@@ -321,6 +335,7 @@ export function mountGlobe(container, geography, onSelect) {
   listen(overlay,'pointermove',e=>{
     const point=local(e), prev=pointers.get(e.pointerId);
     if(!prev){
+      if(e.pointerType==='mouse'&&(e.movementX||e.movementY))stopRotation();
       const nearest=nearby(point.x,point.y,12).sort((a,b)=>Math.hypot(a.x-point.x,a.y-point.y)-Math.hypot(b.x-point.x,b.y-point.y))[0];
       const next=nearest?.g.id??null;if(next!==hover){hover=next;enqueue();}
       overlay.style.cursor=next?'pointer':'grab';return;
@@ -344,18 +359,19 @@ export function mountGlobe(container, geography, onSelect) {
   listen(overlay,'pointerleave',()=>{hover=null;enqueue();});
   listen(overlay,'wheel',e=>{e.preventDefault();zoom(Math.exp(-e.deltaY*(e.ctrlKey ? .012 : .002)));},{passive:false});
   listen(overlay,'keydown',e=>{
+    stopRotation();
     if(e.key==='Escape'){close();return;}
     const delta={ArrowUp:[0,10],ArrowDown:[0,-10],ArrowLeft:[-15,0],ArrowRight:[15,0]}[e.key];
     if(delta){flight=null;view.lon=wrap(view.lon+delta[0]);view.lat=clamp(view.lat+delta[1],-90,90);enqueue();}
     else if(e.key==='+'||e.key==='=')zoom(1.2);
     else if(e.key==='-')zoom(1/1.2);
-    else if(e.key==='Home')reset();
+    else if(e.key==='Home')reset(true);
     else return;
     e.preventDefault();
   });
-  listen(document,'visibilitychange',()=>{if(document.hidden){flight=null;cancelAnimationFrame(frame);frame=0;}else enqueue();});
+  listen(document,'visibilitychange',()=>{lastAutoFrame=null;if(document.hidden){flight=null;cancelAnimationFrame(frame);frame=0;}else enqueue();});
   listen(popup,'keydown',e=>{if(e.key==='Escape'){close();overlay.focus();}});
-  return {focus,zoom,reset,destroy(){
+  return {focus,zoom,reset,stopRotation,destroy(){
     dead=true;cancelAnimationFrame(frame);observer.disconnect();abort.abort();renderer?.dispose();layer.remove();
   }};
 }

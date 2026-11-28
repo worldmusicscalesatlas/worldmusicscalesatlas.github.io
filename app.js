@@ -4,7 +4,7 @@ import {esc} from './diagrams.js'
 import {nearestDegree} from './compare.js'
 import {positions,fmt,signed} from './theory.js'
 import {wheel,notation,rotateTonic,rotateModel,tonicName} from './wheel.js?v=batch02'
-import {mountGlobe} from './globe.js?v=playable-only'
+import {mountGlobe} from './globe.js?v=startup-rotation'
 import {playableRegions} from './coverage.js?v=playable-only'
 const by=id=>document.getElementById(id)
 const query=new URLSearchParams(location.search)
@@ -47,8 +47,11 @@ function storeView(push=false){
  history[push?'pushState':'replaceState'](null,'',url)
 }
 const globe=mountGlobe(by('earth'),regions,id=>chooseRegion(id,true))
+// Freeze the introductory spin before interacting with any atlas control.
+for(const type of ['pointerdown','keydown','focusin'])by('atlas').addEventListener(type,globe.stopRotation,true)
 function chooseRegion(id,push=false,animate=true){
  const group=groups.find(g=>g.id===id);if(!group)return
+ globe.stopRotation()
  closePanel();clearTimeout(menuTimer);audio.stop();active=null;region=id
  by('detail').hidden=true;by('atlas').hidden=false;by('region-list').open=false;by('region').value=id
  const models=all.filter(m=>m.geo_id===id)
@@ -60,12 +63,12 @@ function chooseRegion(id,push=false,animate=true){
  menuTimer=setTimeout(()=>{by('picker').hidden=false;(models.length?by('model'):by('dismiss')).focus({preventScroll:true})},delay)
  storeView(push);window.scrollTo(0,0)
 }
-function home(push=false){
- clearTimeout(menuTimer);active=null;region='';audio.stop();globe.reset()
+function home(push=false,restart=false){
+ clearTimeout(menuTimer);active=null;region='';audio.stop();globe.reset(restart)
  by('picker').hidden=true;by('region-list').open=false;by('region').value='';by('atlas').hidden=false;by('detail').hidden=true;storeView(push)
 }
 function openScale(m,start=0,push=true){
- clearTimeout(menuTimer);audio.stop();active=m;region=m.geo_id
+ globe.stopRotation();clearTimeout(menuTimer);audio.stop();active=m;region=m.geo_id
  degree=m.circle_ready&&!m.reference_pitch_only&&Number.isInteger(Number(start))&&start>=0&&start<m.notes_count?Number(start):0
  by('detail').hidden=false;by('atlas').hidden=true
  for(const [button,panel] of [['info','explanation'],['signature','score'],['compare','compare-panel']]){by(button).setAttribute('aria-expanded','false');by(panel).hidden=true}
@@ -205,7 +208,7 @@ by('panels').onpointerup=e=>{
 }
 by('panels').onpointercancel=by('panels').onlostpointercapture=e=>{if(e.pointerId===drag?.id){if(drag.moved)storeView();drag=null}}
 
-by('minus').onclick=()=>globe.zoom(1/1.2);by('plus').onclick=()=>globe.zoom(1.2);by('reset').onclick=()=>home(true)
+by('minus').onclick=()=>globe.zoom(1/1.2);by('plus').onclick=()=>globe.zoom(1.2);by('reset').onclick=()=>home(true,true)
 window.addEventListener('pagehide',audio.stop)
 window.addEventListener('popstate',()=>location.reload())
 if(requested)openScale(requested,query.get('degree'),false)
