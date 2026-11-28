@@ -161,7 +161,7 @@ test('Public navigation contains only 30 playable geographic entries and linked 
  assert.equal(catalog.scales.length,283);assert.equal(catalog.regions.length,30)
  assert.deepEqual(playableRegions(catalog.regions,catalog.scales),catalog.regions)
  const ids=new Set(catalog.scales.map(s=>s.id))
- for(const g of catalog.regions){assert.ok(g.model_ids.length);assert.ok(g.model_ids.every(id=>ids.has(id)&&catalog.scales.find(s=>s.id===id).geo_id===g.id));assert.match(coverageLabel(g),/^\\d+ models$/)}
+ for(const g of catalog.regions){assert.ok(g.model_ids.length);assert.ok(g.model_ids.every(id=>ids.has(id)&&catalog.scales.find(s=>s.id===id).geo_id===g.id));assert.equal(coverageLabel(g),g.model_ids.length+' models')}
  const assigned=catalog.regions.flatMap(g=>g.model_ids);assert.equal(assigned.length,283);assert.equal(new Set(assigned).size,283)
  for(const s of catalog.scales)assert.ok(assigned.includes(s.id))
  const referenced=new Set(catalog.scales.flatMap(m=>m.source_ids));assert.equal(referenced.size,52);assert.ok(catalog.sources.every(s=>referenced.has(s.id)))
