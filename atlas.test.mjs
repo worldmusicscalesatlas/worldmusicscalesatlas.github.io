@@ -69,7 +69,7 @@ test('Batch 02 Javanese observations preserve the verified source values and dis
  const expected=[["EXP-IDN-ELLIS-1885-SLENDRO-MEAN",[228,256,244,232,240],true,5],["EXP-IDN-ELLIS-1885-SLENDRO-LOWER-GENDER",[191,251,249,261,220],false,6],["EXP-IDN-ELLIS-1885-SLENDRO-UPPER-GENDER",[219,256,261,223,288],false,6],["EXP-IDN-ELLIS-1885-SLENDRO-LAND-SARON",[270,200,266,239,243],false,6],["EXP-IDN-ELLIS-1885-PELOG-INVENTORY",[137,309,129,112,133,278,102],true,7],["EXP-IDN-ELLIS-1885-PELOG-DANGSOE",[137,550,133,278,102],true,5],["EXP-IDN-ELLIS-1885-PELOG-BEM-ELLIS",[137,438,112,411,102],true,5],["EXP-IDN-ELLIS-1885-PELOG-BEM-LAND",[147,416,96,429,112],true,5],["EXP-IDN-ELLIS-1885-PELOG-BARANG-ELLIS",[137,438,112,133,380],true,5],["EXP-IDN-ELLIS-1885-PELOG-BARANG-LAND",[151,426,111,179,333],true,5]]
  const region=catalog.regions.find(g=>g.id==='exp-idn')
  assert.ok(region);assert.deepEqual(region.country_iso3_for_navigation,['IDN'])
- assert.equal(catalog.regions.length,48);assert.equal(catalog.sources.length,86)
+ assert.equal(catalog.regions.length,30);assert.equal(catalog.sources.length,52)
  assert.deepEqual(region.model_ids,expected.map(row=>row[0]))
  for(const [id,steps,circular,n] of expected){
   const model=catalog.scales.find(m=>m.id===id)
@@ -146,8 +146,8 @@ test('Batches 09–10 evidence metadata, observed ranges and source integrity',(
  assert.equal(catalog.scales.filter(m=>m.audit_status==='Historical primary table rechecked').length,4)
 })
 
-import {coverageInfo,coverageLabel} from './coverage.js'
-test('Batches 11–14 preserve primary frequency observations and keep context-only entries out of playback',()=>{
+import {playableRegions,coverageLabel} from './coverage.js'
+test('Batches 11–14 preserve primary frequency observations',()=>{
  const expected=[["B11-BR-PIFANO-MEIA",[653,734,829,889,1020,1075,1183,1320,1487,1679,1784,2042,2180],[202,211,121,238,91,166,189,207,210,105,234,113],2087],["B11-BR-PIFANO-TRES",[623,695,791,825,959,995,1097,1225,1372,1552,1644,1912,2014],[189,224,73,261,64,169,191,196,213,100,261,90],2031],["B11-BR-PIFANO-INTER",[551,624,709,737,848,901,981,1084,1231,1407,1488,1739,1846],[215,221,68,242,105,148,172,221,231,97,270,103],2093]]
  for(const [id,hz,steps,span] of expected){
   const m=catalog.scales.find(s=>s.id===id);assert.ok(m);assert.deepEqual(m.source_frequencies_hz,hz);assert.deepEqual(m.intervals_cents,steps)
@@ -155,9 +155,16 @@ test('Batches 11–14 preserve primary frequency observations and keep context-o
   assert.equal(m.circle_ready,false);assert.equal(m.notes_count,hz.length);assert.equal(m.reference_pitch_only,true);assert.ok(m.cultural_reuse_status)
   assert.doesNotMatch(wheel(m,2.5,'Sharps','Major',modes[0]),/undefined|NaN/)
  }
- const contextual=catalog.regions.filter(g=>g.coverage_status==='context_only');assert.equal(contextual.length,17)
- assert.equal(catalog.regions.filter(g=>g.model_ids.length).length,30)
- for(const g of contextual){const matches=catalog.scales.filter(s=>s.geo_id===g.id);assert.equal(matches.length,0);assert.equal(g.model_ids.length,0);assert.ok(g.context_source_ids.every(id=>catalog.sources.some(s=>s.id===id)));const info=coverageInfo(g,matches,catalog.sources);assert.match(info.text,/Context only/);assert.ok(info.links.length);assert.equal(coverageLabel(g),'context only')}
- const malformed=coverageInfo({context_source_ids:['x']},[],[{id:'x',url:'javascript:alert(1)',citation:'unsafe'}]);assert.equal(malformed.links.length,0)
- const br=catalog.regions.find(g=>g.id==='b11-brazil-cariri');assert.equal(coverageLabel(br),'3 models');assert.deepEqual(coverageInfo(br,catalog.scales.filter(m=>m.geo_id===br.id),catalog.sources),{text:'',links:[]})
+})
+
+test('Public navigation contains only 30 playable geographic entries and linked references',()=>{
+ assert.equal(catalog.scales.length,283);assert.equal(catalog.regions.length,30)
+ assert.deepEqual(playableRegions(catalog.regions,catalog.scales),catalog.regions)
+ const ids=new Set(catalog.scales.map(s=>s.id))
+ for(const g of catalog.regions){assert.ok(g.model_ids.length);assert.ok(g.model_ids.every(id=>ids.has(id)&&catalog.scales.find(s=>s.id===id).geo_id===g.id));assert.equal(coverageLabel(g),g.model_ids.length+' models')}
+ const assigned=catalog.regions.flatMap(g=>g.model_ids);assert.equal(assigned.length,283);assert.equal(new Set(assigned).size,283)
+ for(const s of catalog.scales)assert.ok(assigned.includes(s.id))
+ const referenced=new Set(catalog.scales.flatMap(m=>m.source_ids));assert.equal(referenced.size,52);assert.ok(catalog.sources.every(s=>referenced.has(s.id)))
+ const fake=[{id:'empty',model_ids:[]},{id:'missing',model_ids:['missing-id']},{id:'context',coverage_status:'context_only',model_ids:['example']},{id:'wrong',model_ids:['example']},{id:'ok',model_ids:['example']}]
+ assert.deepEqual(playableRegions(fake,[{id:'example',geo_id:'ok'}]).map(g=>g.id),['ok'])
 })
