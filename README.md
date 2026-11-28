@@ -1,6 +1,6 @@
 # World Music Scales Atlas
 
-Start with D Dorian, or choose Shur to explore the Persian scale on any tonic. On a phone, add the Atlas to the home screen for standalone display. Select a geographic region to explore 240 documented tuning models across 22 navigation entries. Choose a regional scale, then drag the inner diatonic ring to transpose in 50-cent steps. The outer circle preserves the ordered intervals. Compare Scales aligns octave models on concentric rings and measured open spans on a shared cent axis. Source interpretations remain under review.
+Start with D Dorian, or choose Shur to explore the Persian scale on any tonic. On a phone, add the Atlas to the home screen for standalone display. Select a geographic region to explore 269 documented tuning models across 28 navigation entries. Choose a regional scale, then drag the inner diatonic ring to transpose in 50-cent steps. The outer circle preserves the ordered intervals. Compare Scales aligns octave models on concentric rings and measured open spans on a shared cent axis. Source interpretations remain under review.
 
 The public catalog contains app-facing model metadata, tuning intervals, references and geographic navigation. The research workbooks and notes are private.
 
@@ -25,3 +25,7 @@ Four theoretical octave representations derived from the Koizumi tetrachord fram
 ## Research expansion (Batch 04 — Azerbaijan and Thailand)
 
 Four full-range theoretical Azerbaijani models derived from Hajibeyov’s tetrachord construction and four Thai tuning references (one ideal comparator and three documented pitch sequences from Wisuttipat 2015, CC BY 4.0). The theoretical encodings are not acoustic measurements, and the long measured spans are preserved without normalization. First pitches serve as playback references; functional modal centers and actual intonation are not inferred from them. Other candidates remain under review.
+
+## Research expansion (Batches 05–08)
+
+29 source-specific representations: five Korean pansori pitch collections; 12 Ethiopian Amhara recording-derived bati profiles; Hungarian and Andalusian theoretical examples; nine Colombian marimba interval inventories; and an ’Are’are equiheptatonic ideal. No octave closure is invented. Ethiopian rows with any sum discrepancy and candidates with unresolved attribution or insufficient evidence remain excluded. Measured-data sequences are attributed to McBride, Passmore & Tlusty’s DaMuSc (CC BY 4.0) and the original investigators; original article figures, audio and prose are not reproduced. The CC BY 4.0 license remains applicable to the attributed DaMuSc data. Mathematical overlap is not cultural equivalence. Primary numerical text was checked, but page images were unavailable for some sources.
