@@ -19,7 +19,7 @@ import {readFileSync} from 'node:fs'
 import {wheel,rotateModel,rotateTonic,notation} from './wheel.js'
 const catalog=JSON.parse(readFileSync(new URL('./catalog.json',import.meta.url)))
 test('Every geographic model is selectable and transposable through 24 ring positions',()=>{
- assert.equal(catalog.scales.length,232)
+ assert.equal(catalog.scales.length,240)
  for(const m of catalog.scales){
   assert.ok(catalog.regions.find(g=>g.id===m.geo_id).model_ids.includes(m.id))
   for(let t=0;t<12;t+=.5){
@@ -69,7 +69,7 @@ test('Batch 02 Javanese observations preserve the verified source values and dis
  const expected=[["EXP-IDN-ELLIS-1885-SLENDRO-MEAN",[228,256,244,232,240],true,5],["EXP-IDN-ELLIS-1885-SLENDRO-LOWER-GENDER",[191,251,249,261,220],false,6],["EXP-IDN-ELLIS-1885-SLENDRO-UPPER-GENDER",[219,256,261,223,288],false,6],["EXP-IDN-ELLIS-1885-SLENDRO-LAND-SARON",[270,200,266,239,243],false,6],["EXP-IDN-ELLIS-1885-PELOG-INVENTORY",[137,309,129,112,133,278,102],true,7],["EXP-IDN-ELLIS-1885-PELOG-DANGSOE",[137,550,133,278,102],true,5],["EXP-IDN-ELLIS-1885-PELOG-BEM-ELLIS",[137,438,112,411,102],true,5],["EXP-IDN-ELLIS-1885-PELOG-BEM-LAND",[147,416,96,429,112],true,5],["EXP-IDN-ELLIS-1885-PELOG-BARANG-ELLIS",[137,438,112,133,380],true,5],["EXP-IDN-ELLIS-1885-PELOG-BARANG-LAND",[151,426,111,179,333],true,5]]
  const region=catalog.regions.find(g=>g.id==='exp-idn')
  assert.ok(region);assert.deepEqual(region.country_iso3_for_navigation,['IDN'])
- assert.equal(catalog.regions.length,20);assert.equal(catalog.sources.length,34)
+ assert.equal(catalog.regions.length,22);assert.equal(catalog.sources.length,44)
  assert.deepEqual(region.model_ids,expected.map(row=>row[0]))
  for(const [id,steps,circular,n] of expected){
   const model=catalog.scales.find(m=>m.id===id)
@@ -96,6 +96,22 @@ test('Batch 03 Japanese and Ryukyuan models preserve interval order, provenance 
   assert.deepEqual(rotateModel(m,1).intervals_cents,steps);assert.match(wheel(m,0,'Sharps','Major'),/REFERENCE/)
   const compared=wheel(m,2.5,'Sharps','Major',modes[0]);assert.doesNotMatch(compared,/undefined|NaN/)
  }
- assert.equal(catalog.scales.filter(s=>s.id.startsWith('B03-')).length,6)
+ assert.equal(catalog.scales.filter(s=>s.id.startsWith('B03-JP-')).length,6)
  assert.match(catalog.sources.find(s=>s.id==='EXP-ELLIS-1885').citation,/522–523/)
+})
+
+test('Batch 04 preserves Azerbaijani theoretical ranges and Thai measured spans',()=>{
+ const expected=[["B04-AZ-RAST","b04-azerbaijan",[200,200,100,200,200,100,200,200,100],false,10],["B04-AZ-SHUR","b04-azerbaijan",[200,100,200,200,100,200,200,100,200],false,10],["B04-AZ-SEGAH","b04-azerbaijan",[100,200,200,100,200,200,100,200,200],false,10],["B04-AZ-CHARGAH","b04-azerbaijan",[100,300,100,100,300,100,200,100,300,100],false,11],["B03-TH-7EDO","b03-thailand",[171.42857142857142,171.42857142857142,171.42857142857142,171.42857142857142,171.42857142857142,171.42857142857142,171.42857142857142],true,7],["B03-TH-REF","b03-thailand",[155,170,180,170,180,160,185],true,7],["B03-TH-RANAT-THUM","b03-thailand",[185,180,165,170,170,170,170,180,180,165,170,170,170,170,180,180],false,17],["B03-TH-RANAT-EK","b03-thailand",[255,170,170,170,170,180,180,165,170,170,170,170,180,180,165,170,170,170,170,180,180],false,22]]
+ for(const [id,geo,steps,circular,n] of expected){
+  const m=catalog.scales.find(s=>s.id===id);assert.ok(m);assert.equal(m.geo_id,geo)
+  assert.deepEqual(m.intervals_cents,steps);assert.equal(m.circle_ready,circular);assert.equal(m.notes_count,n)
+  assert.ok(m.context_note);assert.equal(m.reference_pitch_only,true);assert.ok(m.source_ids.every(id=>catalog.sources.some(s=>s.id===id)))
+  assert.deepEqual(rotateModel(m,1).intervals_cents,steps);assert.match(wheel(m,0,'Sharps','Major'),/REFERENCE/)
+  assert.doesNotMatch(wheel(m,2.5,'Sharps','Major',modes[0]),/undefined|NaN/)
+ }
+ assert.deepEqual(catalog.regions.find(g=>g.id==='b04-azerbaijan').country_iso3_for_navigation,['AZE'])
+ assert.deepEqual(catalog.regions.find(g=>g.id==='b03-thailand').country_iso3_for_navigation,['THA'])
+ assert.equal(catalog.sources.find(s=>s.id==='B04-TH-WISUTTIPAT-2015').license,'CC BY 4.0')
+ assert.equal(catalog.scales.filter(m=>m.id.startsWith('B04-AZ-')).length,4)
+ assert.equal(catalog.scales.filter(m=>m.id.startsWith('B03-TH-')).length,4)
 })
