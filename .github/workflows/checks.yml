@@ -12,3 +12,4 @@ jobs:
           node-version: 22
       - run: node --test atlas.test.mjs
       - run: for file in *.js; do node --check "$file"; done
+      - run: npm run seo:check

@@ -1,1 +1,10 @@
-{"name":"international-music-scales-atlas","private":true,"type":"module","scripts":{"test":"node --test atlas.test.mjs"}}
+{
+  "name": "international-music-scales-atlas",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test atlas.test.mjs",
+    "seo:generate": "node scripts/generate-reference.mjs",
+    "seo:check": "node scripts/generate-reference.mjs --check"
+  }
+}
